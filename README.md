@@ -1,6 +1,6 @@
 # Summary
 
-## Personal project using Spring Boot
+Personal project using Spring Boot
 
 # Back-End
 

@@ -1,13 +1,13 @@
 'use strict';
 
-const notice = angular.module('app', []);
+app.controller('noticeController', ($scope, $http) => {
 
-notice.controller('getNoticeCtrl', ($scope, $http) => {
-
-    $http.get('api/notice?size=0&type=&keyword=')
+    $http
+        .get('api/notice')
         .then(
             (response) => {
                 console.log(response.data);
+                $scope.notices = response.data.content;
             },
             (error) => {
                 console.log(error);

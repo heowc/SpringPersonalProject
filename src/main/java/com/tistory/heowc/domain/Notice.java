@@ -33,9 +33,9 @@ public class Notice implements Serializable {
     @NonNull
     private String title;
 
-    @Column(name = "CONTENTS") @NotNull
+    @Column(name = "CONTENT") @NotNull
     @NonNull
-    private String contents;
+    private String content;
 
     @Column(name = "CREATE_DATETIME") @NotNull
     @NonNull

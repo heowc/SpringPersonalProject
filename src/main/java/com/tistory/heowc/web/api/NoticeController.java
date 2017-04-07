@@ -28,9 +28,9 @@ public class NoticeController {
     }
 
     @GetMapping
-    public Page<Notice> save(@RequestParam Integer size,
-                             @RequestParam String  type,
-                             @RequestParam String  keyword) {
+    public Page<Notice> save(@RequestParam(required = false, defaultValue = "0") Integer size,
+                             @RequestParam(required = false, defaultValue = "")  String  type,
+                             @RequestParam(required = false, defaultValue = "")  String  keyword) {
         return service.getNotice(size, type, keyword);
     }
 }
