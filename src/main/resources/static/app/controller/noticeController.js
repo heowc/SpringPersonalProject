@@ -1,12 +1,10 @@
 'use strict';
 
-app.controller('noticeController', ($scope, $http) => {
+app.controller('noticeController', (noticeService, $scope) => {
 
-    $http
-        .get('api/notice')
+    noticeService.getNotices()
         .then(
             (response) => {
-                console.log(response.data);
                 $scope.notices = response.data.content;
             },
             (error) => {

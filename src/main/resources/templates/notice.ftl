@@ -25,7 +25,8 @@
     </div>
 </body>
 <script type="application/javascript" src="webjars/angular/1.6.4/angular.js"></script>
-<script type="application/javascript" src="webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+<#--<script type="application/javascript" src="webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>-->
 <script type="application/javascript" src="/app/app.js"></script>
+<script type="application/javascript" src="/app/service/noticeService.js"></script>
 <script type="application/javascript" src="/app/controller/noticeController.js"></script>
 </html>
