@@ -12,6 +12,11 @@ Personal project using Spring Boot
 
 * Freemarker 1.5.2.RELEASE
 * Angular 1.6.4.RELEASE
+* Bootstrap 4.0.0-alpha.6
+
+## plugin
+
+* Summernote 0.8.2
 
 # Database
 

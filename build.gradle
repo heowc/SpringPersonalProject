@@ -36,7 +36,8 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-freemarker')
 	compile('org.webjars.bower:angular:1.6.4')
-	compile 'org.webjars.bower:angular-bootstrap:2.5.0'
-
+	compile('org.webjars.bower:angular-bootstrap:2.5.0')
+	compile('org.webjars.bower:angular-summernote:0.8.1')
+	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
