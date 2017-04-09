@@ -2,8 +2,16 @@
 
 app.factory('noticeService', ($http) => {
     return {
-        getNotices : () => {
-            return $http.get('api/notice');
+        getNotices : (size = 0, type = '', keyword = '') => {
+            return $http.get(`api/notice/search?size=${size}&type=${type}&keyword=${keyword}`);
+        },
+
+        getById : (idx) => {
+            return $http.get(`api/notice/${idx}`)
+        },
+
+        deleteById : (idx) => {
+            return $http.delete(`api/notice/${idx}`)
         }
     };
 });

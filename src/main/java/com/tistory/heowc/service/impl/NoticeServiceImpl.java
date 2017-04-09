@@ -18,6 +18,16 @@ public class NoticeServiceImpl implements NoticeService {
     @Autowired NoticeRepository repository;
 
     @Override
+    public Page<Notice> getNoticePaging(Integer page, String type, String keyword) {
+        return repository.findAll(new PageRequest(page, 10));
+    }
+
+    @Override
+    public Notice getNoticeById(Long idx) {
+        return repository.findOne(idx);
+    }
+
+    @Override
     public void insert(Notice notice) {
         repository.save(notice);
     }
@@ -31,10 +41,5 @@ public class NoticeServiceImpl implements NoticeService {
     public void update(Notice notice) {
         notice.setModifyDateTime(LocalDateTime.now());
         repository.save(notice);
-    }
-
-    @Override
-    public Page<Notice> getNotice(Integer page, String type, String keyword) {
-        return repository.findAll(new PageRequest(page, 10));
     }
 }

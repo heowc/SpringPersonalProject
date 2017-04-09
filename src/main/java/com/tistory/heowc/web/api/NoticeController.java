@@ -12,13 +12,25 @@ public class NoticeController {
 
     @Autowired NoticeService service;
 
+    @GetMapping("search")
+    public Page<Notice> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                       @RequestParam(required = false, defaultValue = "")  String  type,
+                                       @RequestParam(required = false, defaultValue = "")  String  keyword) {
+        return service.getNoticePaging(page, type, keyword);
+    }
+
+    @GetMapping("{idx}")
+    public Notice findNoticeById(@PathVariable Long idx) {
+        return service.getNoticeById(idx);
+    }
+
     @PostMapping
     public void insert(@RequestBody Notice notice) {
         service.insert(notice);
     }
 
-    @DeleteMapping
-    public void delete(@RequestParam Long idx) {
+    @DeleteMapping("{idx}")
+    public void delete(@PathVariable Long idx) {
         service.delete(idx);
     }
 
@@ -27,10 +39,5 @@ public class NoticeController {
         service.update(notice);
     }
 
-    @GetMapping
-    public Page<Notice> save(@RequestParam(required = false, defaultValue = "0") Integer size,
-                             @RequestParam(required = false, defaultValue = "")  String  type,
-                             @RequestParam(required = false, defaultValue = "")  String  keyword) {
-        return service.getNotice(size, type, keyword);
-    }
+
 }
