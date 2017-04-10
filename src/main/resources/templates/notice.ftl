@@ -20,9 +20,8 @@
 
             <div ng-view></div>
 
-            <div class="btn-group" data-toggle="buttons">
-                <a href="#noticeWrite" class="btn btn-primary">Write</a>
-            </div>
+            <a href="notice#" class="btn btn-primary">Main</a>
+            <a href="notice#noticeWrite" class="btn btn-primary">Write</a>
         </div>
         <div id="footer"></div>
     </div>

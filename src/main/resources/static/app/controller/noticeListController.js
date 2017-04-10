@@ -2,6 +2,8 @@
 
 app.controller('noticeListController', (noticeService, uibDateParser, $scope, $location) => {
 
+    console.log('noticeListController');
+
     noticeService.getNotices()
                 .then(
                     (response) => {
