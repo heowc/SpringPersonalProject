@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeController', (noticeService, uibDateParser, $scope, $location) => {
+app.controller('noticeListController', (noticeService, uibDateParser, $scope, $location) => {
 
     noticeService.getNotices()
                 .then(
@@ -37,10 +37,5 @@ app.controller('noticeController', (noticeService, uibDateParser, $scope, $locat
                             console.log(error);
                         }
                     );
-    };
-
-
-    $scope.noticeWrite = () => {
-        console.log('noticeWrite');
     };
 });

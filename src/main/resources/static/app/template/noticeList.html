@@ -1,0 +1,26 @@
+<div id="notice-area" ng-controller="noticeListController">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>제목</td>
+            <td>글쓴이</td>
+            <td>작성일</td>
+            <td>비고</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="notice in notices"  >
+            <td ng-click="detail($index)">{{notice.title}}</td>
+            <td>{{notice.writer}}</td>
+            <td>{{notice.createDateTime}}</td>
+            <td>
+                <label class="btn btn-warning btn-sm" ng-click="delete($index)">
+                    Delete
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
