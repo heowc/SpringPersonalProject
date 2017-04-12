@@ -12,7 +12,7 @@
         <tr ng-repeat="notice in notices"  >
             <td ng-click="detail($index)">{{notice.title}}</td>
             <td>{{notice.writer}}</td>
-            <td>{{notice.createDateTime}}</td>
+            <td>{{notice.createDateTime | date : 'yyyy-MM-dd' : timezone}}</td>
             <td>
                 <button class="btn btn-warning btn-sm" ng-click="delete($index)">Delete</button>
             </td>

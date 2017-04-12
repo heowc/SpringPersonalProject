@@ -18,10 +18,10 @@
                 <p class="text-success">I will continue this work.</p>
             </div>
 
-            <div ng-view></div>
+            <ng-view></ng-view>
 
             <a href="notice#" class="btn btn-primary">Main</a>
-            <a href="notice#noticeWrite" class="btn btn-primary">Write</a>
+            <a href="notice#write" class="btn btn-primary">Write</a>
         </div>
         <div id="footer"></div>
     </div>
@@ -34,7 +34,7 @@
 <script type="application/javascript" src="webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script><#--all-->
 <script type="application/javascript" src="webjars/summernote/0.8.2/dist/summernote.min.js"></script>
 <script type="application/javascript" src="webjars/angular-summernote/0.8.1/dist/angular-summernote.min.js"></script>
-<script type="application/javascript" src="/app/app.js"></script>
+<script type="application/javascript" src="/app/app.js"></script><#--all-->
 <script type="application/javascript" src="/app/route.js"></script><#--all-->
 <script type="application/javascript" src="/app/service/noticeService.js"></script>
 <script type="application/javascript" src="/app/controller/noticeListController.js"></script>
