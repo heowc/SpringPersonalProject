@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeListController', (noticeService, uibDateParser, $scope, $location) => {
+app.controller('noticeListController', (noticeService, uibDateParser, $scope) => {
 
     console.log('noticeListController');
 
@@ -16,8 +16,6 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
                 );
 
     $scope.detail = (index) => {
-        console.log('noticeDetail');
-        console.log($scope.notices[index]);
         noticeService.getById($scope.notices[index].idx)
                     .then(
                         (response) => {

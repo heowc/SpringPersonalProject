@@ -1,16 +1,15 @@
 'use strict';
 
-app.config(($routeProvider) => {
+app.config(($routeProvider, $locationProvider) => {
+
+    $locationProvider.html5Mode(true);
 
     $routeProvider
-        .when('/', {
-            templateUrl : '/app/template/noticeList.html'
+        .when('/notice', {
+            templateUrl : 'app/template/noticeList.html'
         })
-        .when('/write', {
-            templateUrl : '/app/template/noticeWrite.html'
+        .when('/notice/write', {
+            templateUrl : 'app/template/noticeWrite.html'
         })
-        .otherwise({redirectTo: '/'});
-        // .when('/', {
-        //     templateUrl : '/app/template/noticeWrite.html'
-        // });
+        .otherwise({redirectTo: '/notice'});
 });

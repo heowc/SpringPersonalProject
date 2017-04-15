@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Won Chul's Personal Project</title>
@@ -20,8 +21,10 @@
 
             <ng-view></ng-view>
 
-            <a href="notice#" class="btn btn-primary">Main</a>
-            <a href="notice#write" class="btn btn-primary">Write</a>
+            <div class="btn-group">
+                <a href="notice" class="btn btn-primary">Main</a>
+                <a href="notice/write" class="btn btn-primary">Write</a>
+            </div>
         </div>
         <div id="footer"></div>
     </div>
@@ -36,6 +39,7 @@
 <script type="application/javascript" src="webjars/angular-summernote/0.8.1/dist/angular-summernote.min.js"></script>
 <script type="application/javascript" src="/app/app.js"></script><#--all-->
 <script type="application/javascript" src="/app/route.js"></script><#--all-->
+<script type="application/javascript" src="/app/component/saveButton.js"></script>
 <script type="application/javascript" src="/app/service/noticeService.js"></script>
 <script type="application/javascript" src="/app/controller/noticeListController.js"></script>
 <script type="application/javascript" src="/app/controller/noticeWriteController.js"></script>
