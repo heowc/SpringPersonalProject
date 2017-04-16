@@ -29,6 +29,8 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void insert(Notice notice) {
+        notice.setCreateDateTime(LocalDateTime.now());
+        notice.setModifyDateTime(LocalDateTime.now());
         repository.save(notice);
     }
 

@@ -1,3 +1,5 @@
 <div ng-controller="noticeWriteController">
-    <summernote config="options" lang="ko-KR" code="text"></summernote>
+    <summernote config="options" ng-model="text"></summernote>
+
+    <button class="btn btn-primary" ng-click="save()">Save</button>
 </div>

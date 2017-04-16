@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 @Component
 public class InitRunner implements CommandLineRunner {
 
@@ -17,8 +15,6 @@ public class InitRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Notice notice = new Notice("Spring Personal Project",
                                     "Spring Personal Project",
-                                    LocalDateTime.now(),
-                                    LocalDateTime.now(),
                                     "won chul");
         noticeService.insert(notice);
     }

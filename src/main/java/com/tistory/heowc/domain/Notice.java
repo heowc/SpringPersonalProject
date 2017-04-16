@@ -38,11 +38,9 @@ public class Notice implements Serializable {
     private String content;
 
     @Column(name = "CREATE_DATETIME") @NotNull
-    @NonNull
     private LocalDateTime createDateTime;
 
     @Column(name = "MODIFY_DATETIME") @NotNull
-    @NonNull
     private LocalDateTime modifyDateTime;
 
     @Column(name = "WRITER") @NotNull

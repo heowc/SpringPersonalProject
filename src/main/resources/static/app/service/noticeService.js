@@ -12,6 +12,10 @@ app.factory('noticeService', ($http) => {
 
         deleteById : (idx) => {
             return $http.delete(`api/notice/${idx}`)
+        },
+
+        create : (notice) => {
+            return $http.post('api/notice', notice);
         }
     };
 });

@@ -22,8 +22,8 @@
             <ng-view></ng-view>
 
             <div class="btn-group">
-                <a href="notice" class="btn btn-primary">Main</a>
-                <a href="notice/write" class="btn btn-primary">Write</a>
+                <a ng-href="notice" class="btn btn-primary">Main</a>
+                <a ng-href="notice/write" class="btn btn-primary">Write</a>
             </div>
         </div>
         <div id="footer"></div>
