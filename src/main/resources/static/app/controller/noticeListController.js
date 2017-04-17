@@ -16,7 +16,7 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
                 );
 
     $scope.detail = (index) => {
-        $location.path(`notice/detail/${index}`);
+        $location.path(`notice/detail/${$scope.notices[index].idx}`);
     };
 
     $scope.delete = (index) => {

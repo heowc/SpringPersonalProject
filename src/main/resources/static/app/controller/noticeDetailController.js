@@ -4,22 +4,19 @@ app.controller('noticeDetailController', (noticeService, $scope, $routeParams) =
 
     console.log('noticeDetailController');
 
-    $scope.options = {
-        toolbar: [],
-        buttons: {
-            save: SaveButton
-        },
-        popover: {
-            image: [],
-            link: [],
-            air: []
-        }
-    };
+    // $scope.options = {
+    //     toolbar: [],
+    //     popover: {
+    //         image: [],
+    //         link: [],
+    //         air: []
+    //     }
+    // };
 
-    noticeService.getById($routeParams)
+    noticeService.getById($routeParams.id)
                     .then(
                         (response) => {
-                            $scope.notices = response.data.content;
+                            $scope.text = response.data.content;
                         },
                         (error) => {
                             console.log(error);

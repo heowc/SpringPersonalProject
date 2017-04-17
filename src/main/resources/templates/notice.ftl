@@ -39,8 +39,8 @@
 <script type="application/javascript" src="webjars/angular-summernote/0.8.1/dist/angular-summernote.min.js"></script>
 <script type="application/javascript" src="/app/app.js"></script><#--all-->
 <script type="application/javascript" src="/app/route.js"></script><#--all-->
-<script type="application/javascript" src="/app/component/saveButton.js"></script>
 <script type="application/javascript" src="/app/service/noticeService.js"></script>
 <script type="application/javascript" src="/app/controller/noticeListController.js"></script>
 <script type="application/javascript" src="/app/controller/noticeWriteController.js"></script>
+<script type="application/javascript" src="/app/controller/noticeDetailController.js"></script>
 </html>

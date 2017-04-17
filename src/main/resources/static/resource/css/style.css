@@ -2,3 +2,9 @@
 body {
     padding-top: 50px;
 }
+
+textarea {
+    width: 100%;
+    min-width: 300px;
+
+}
