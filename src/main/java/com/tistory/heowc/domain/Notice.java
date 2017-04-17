@@ -1,8 +1,6 @@
 package com.tistory.heowc.domain;
 
 import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -12,7 +10,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@RequiredArgsConstructor
 @Entity
 @Table(name = "NOTICE")
 @GenericGenerator(
@@ -30,11 +27,9 @@ public class Notice implements Serializable {
     private Long idx;
 
     @Column(name = "TITLE") @NotNull
-    @NonNull
     private String title;
 
     @Column(name = "CONTENT") @NotNull
-    @NonNull
     private String content;
 
     @Column(name = "CREATE_DATETIME") @NotNull
@@ -44,8 +39,13 @@ public class Notice implements Serializable {
     private LocalDateTime modifyDateTime;
 
     @Column(name = "WRITER") @NotNull
-    @NonNull
     private String writer;
 
     private Notice() {}
+
+    public Notice(String title, String content, String writer) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
 }

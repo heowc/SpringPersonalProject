@@ -16,12 +16,12 @@ public class NoticeController {
     public Page<Notice> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
                                        @RequestParam(required = false, defaultValue = "")  String  type,
                                        @RequestParam(required = false, defaultValue = "")  String  keyword) {
-        return service.getNoticePaging(page, type, keyword);
+        return service.findNoticePaging(page, type, keyword);
     }
 
     @GetMapping("{idx}")
     public Notice findNoticeById(@PathVariable Long idx) {
-        return service.getNoticeById(idx);
+        return service.findNoticeById(idx);
     }
 
     @PostMapping

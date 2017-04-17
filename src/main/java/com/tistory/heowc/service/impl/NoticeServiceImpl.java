@@ -15,33 +15,39 @@ import java.time.LocalDateTime;
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
 
-    @Autowired NoticeRepository repository;
+    @Autowired NoticeRepository noticeRepository;
 
     @Override
-    public Page<Notice> getNoticePaging(Integer page, String type, String keyword) {
-        return repository.findAll(new PageRequest(page, 10));
+    public Page<Notice> findNoticePaging(Integer page, String type, String keyword) {
+        if("title".equals(type)) {
+            return noticeRepository.findByTitleContaining(keyword, new PageRequest(page, 10));
+        }
+        if("content".equals(type)) {
+            return noticeRepository.findByContentContaining(keyword, new PageRequest(page, 10));
+        }
+        return noticeRepository.findAll(new PageRequest(page, 10));
     }
 
     @Override
-    public Notice getNoticeById(Long idx) {
-        return repository.findOne(idx);
+    public Notice findNoticeById(Long idx) {
+        return noticeRepository.findOne(idx);
     }
 
     @Override
     public void insert(Notice notice) {
         notice.setCreateDateTime(LocalDateTime.now());
         notice.setModifyDateTime(LocalDateTime.now());
-        repository.save(notice);
+        noticeRepository.save(notice);
     }
 
     @Override
     public void delete(Long idx) {
-        repository.delete(idx);
+        noticeRepository.delete(idx);
     }
 
     @Override
     public void update(Notice notice) {
         notice.setModifyDateTime(LocalDateTime.now());
-        repository.save(notice);
+        noticeRepository.save(notice);
     }
 }
