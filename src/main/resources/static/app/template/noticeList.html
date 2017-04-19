@@ -1,4 +1,14 @@
 <div id="notice-area" ng-controller="noticeListController">
+
+    <form class="form-inline" ng-submit="noticeSearch()">
+        <div class="form-group">
+            <select class="form-control" ng-model="selectedType"
+                    ng-options="type.name for type in types track by type.value"></select>
+            &nbsp:&nbsp
+            <input class="form-control" type="text" ng-model="keyword">
+        </div>
+    </form>
+
     <table class="table table-striped">
         <thead>
         <tr>

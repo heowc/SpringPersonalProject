@@ -4,6 +4,18 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
 
     console.log('noticeListController');
 
+    $scope.types = [
+        {
+            name : '제목',
+            value : 'title'
+        },
+        {
+            name : '내용',
+            value : 'content'
+        }];
+
+    $scope.selectedType = $scope.types[0];
+
     noticeService.getNotices()
                 .then(
                     (response) => {
@@ -30,4 +42,17 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
                         }
                     );
     };
+
+    $scope.noticeSearch = () => {
+        noticeService.getNotices(0, $scope.selectedType.value, $scope.keyword)
+            .then(
+                (response) => {
+                    console.log(response.data.content);
+                    $scope.notices = response.data.content;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
 });
