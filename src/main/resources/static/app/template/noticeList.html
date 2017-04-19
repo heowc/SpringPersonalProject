@@ -3,7 +3,7 @@
     <form class="form-inline" ng-submit="noticeSearch()">
         <div class="form-group">
             <select class="form-control" ng-model="selectedType"
-                    ng-options="type.name for type in types track by type.value"></select>
+                    ng-options="type.name for type in types"></select>
             &nbsp:&nbsp
             <input class="form-control" type="text" ng-model="keyword">
         </div>

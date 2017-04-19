@@ -13,6 +13,7 @@
     <script type="application/javascript" src="webjars/jquery/3.2.1/dist/jquery.min.js"></script>
     <script type="application/javascript" src="webjars/angular/1.6.4/angular.min.js"></script><#--all-->
     <script type="application/javascript" src="webjars/angular-route/1.6.4/angular-route.min.js"></script><#--all-->
+    <script type="application/javascript" src="webjars/angular-sanitize/1.6.4/angular-sanitize.min.js"></script><#--all-->
     <script type="application/javascript" src="webjars/tether/1.4.0/dist/js/tether.min.js"></script>
     <script type="application/javascript" src="webjars/bootstrap/4.0.0-alpha.6/dist/js/bootstrap.min.js"></script>
     <script type="application/javascript" src="webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script><#--all-->
