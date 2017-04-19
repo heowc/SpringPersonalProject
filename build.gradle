@@ -3,10 +3,12 @@ buildscript {
 		springBootVersion = '1.5.2.RELEASE'
 	}
 	repositories {
+		jcenter()
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.springframework:springloaded:1.2.5.RELEASE'
 	}
 }
 
@@ -22,6 +24,12 @@ repositories {
 	mavenCentral()
 }
 
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+	}
+}
 
 dependencies {
 	compile('org.hibernate:hibernate-java8:5.0.12.Final')
@@ -37,6 +45,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-freemarker')
 	compile('org.webjars.bower:angular:1.6.4')
 	compile('org.webjars.bower:angular-route:1.6.4')
+	compile('org.webjars.bower:angular-sanitize:1.6.4')
 	compile('org.webjars.bower:angular-bootstrap:2.5.0')
 	compile('org.webjars.bower:angular-summernote:0.8.1')
 	
