@@ -19,7 +19,6 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
     noticeService.getNotices()
                 .then(
                     (response) => {
-                        console.log(response.data.content);
                         $scope.notices = response.data.content;
                     },
                     (error) => {
@@ -47,7 +46,6 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
         noticeService.getNotices(0, $scope.selectedType.value, $scope.keyword)
             .then(
                 (response) => {
-                    console.log(response.data.content);
                     $scope.notices = response.data.content;
                 },
                 (error) => {

@@ -1,5 +1,13 @@
 <div ng-controller="noticeWriteController">
-    <summernote config="options" ng-model="text"></summernote>
+    <form>
+        <div class="form-group form-inline">
+            <label>제목</label>&nbsp:&nbsp
+            <input type="text" class="form-control" ng-model="title">
+        </div>
+        <div class="form-group">
+            <summernote config="options" ng-model="content"></summernote>
+        </div>
+    </form>
 
     <div class="btn-group float-right">
         <button class="btn btn-primary" ng-click="save()">Save</button>

@@ -27,12 +27,12 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
         console.log($scope.text);
 
         let notice = {
-            title   : 'test',
-            content : $scope.text,
+            title   : $scope.title,
+            content : $scope.content,
             writer  : 'heowc'
         };
 
-        if($scope.text.length > 0) {
+        if($scope.content.length > 0) {
             noticeService.create(notice)
                 .then(
                     (response) => {
