@@ -16,16 +16,6 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
 
     $scope.selectedType = $scope.types[0];
 
-    noticeService.getNotices()
-                .then(
-                    (response) => {
-                        $scope.notices = response.data.content;
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                );
-
     $scope.detail = (index) => {
         $location.path(`notice/detail/${$scope.notices[index].idx}`);
     };
@@ -42,15 +32,23 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
                     );
     };
 
-    $scope.noticeSearch = () => {
-        noticeService.getNotices(0, $scope.selectedType.value, $scope.keyword)
+    $scope.noticeSearch = (page) => {
+        noticeService.getNotices(page, $scope.selectedType.value, $scope.keyword)
             .then(
                 (response) => {
-                    $scope.notices = response.data.content;
+                    setNoticeListView(response.data);
                 },
                 (error) => {
                     console.log(error);
                 }
             );
+    };
+
+    const setNoticeListView = (data) => {
+        console.log(data);
+        $scope.bigTotalItems = data.totalElements;
+        $scope.bigCurrentPage = data.number + 1;
+        $scope.maxSize = 5;
+        $scope.notices = data.content;
     }
 });

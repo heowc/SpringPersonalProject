@@ -1,4 +1,4 @@
-<div id="notice-area" ng-controller="noticeListController">
+<div id="notice-area" ng-controller="noticeListController" ng-init="noticeSearch(0)">
 
     <form class="form-inline" ng-submit="noticeSearch()">
         <div class="form-group">
@@ -19,14 +19,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="notice in notices"  >
-            <td ng-click="detail($index)">{{notice.title}}</td>
-            <td>{{notice.writer}}</td>
-            <td>{{notice.createDateTime | date : 'yyyy-MM-dd' : timezone}}</td>
-            <td>
-                <button class="btn btn-warning btn-sm" ng-click="delete($index)">Delete</button>
-            </td>
-        </tr>
+            <tr ng-repeat="notice in notices"  >
+                <td ng-click="detail($index)">{{notice.title}}</td>
+                <td>{{notice.writer}}</td>
+                <td>{{notice.createDateTime | date : 'yyyy-MM-dd' : timezone}}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" ng-click="delete($index)">Delete</button>
+                </td>
+            </tr>
         </tbody>
     </table>
+
+    <ul uib-pagination
+        total-items="bigTotalItems"
+        ng-model="bigCurrentPage"
+        max-size="maxSize"
+        class="pagination-sm"
+        boundary-link-numbers="true"></ul>
 </div>

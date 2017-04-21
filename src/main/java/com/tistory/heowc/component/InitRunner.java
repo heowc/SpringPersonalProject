@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.IntStream;
+
 @Component
 @Transactional
 public class InitRunner implements CommandLineRunner {
@@ -15,9 +17,10 @@ public class InitRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Notice notice = new Notice("Spring Personal Project",
-                                    "Spring Personal Project",
-                                    "won chul");
-        noticeService.insert(notice);
+
+        IntStream.range(0,55)
+                .forEach(value -> noticeService.insert(new Notice("Spring Personal Project",
+                        "Spring Personal Project",
+                        "won chul")));
     }
 }

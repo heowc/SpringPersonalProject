@@ -38,7 +38,7 @@
 
             <ng-view></ng-view>
 
-            <div class="btn-group">
+            <div class="btn-group float-left">
                 <a ng-href="notice" class="btn btn-primary">Main</a>
                 <a ng-href="notice/write" class="btn btn-primary">Write</a>
             </div>
