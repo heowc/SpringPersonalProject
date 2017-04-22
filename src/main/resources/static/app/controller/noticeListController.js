@@ -24,7 +24,7 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
         noticeService.deleteById($scope.notices[index].idx)
                     .then(
                         (response) => {
-                            $scope.notices.splice(index, 1);
+                            $scope.noticeSearch($scope.bigCurrentPage);
                         },
                         (error) => {
                             console.log(error);

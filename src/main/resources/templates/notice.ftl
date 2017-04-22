@@ -25,7 +25,7 @@
     <script type="application/javascript" src="/app/controller/noticeListController.js"></script>
     <script type="application/javascript" src="/app/controller/noticeWriteController.js"></script>
     <script type="application/javascript" src="/app/controller/noticeDetailController.js"></script>
-
+    <script type="application/javascript" src="/app/controller/noticeModifyController.js"></script>
 </head>
 <body ng-app="app" >
     <div id="wrap">

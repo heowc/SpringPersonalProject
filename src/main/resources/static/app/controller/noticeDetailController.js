@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeDetailController', (noticeService, $scope, $routeParams, $sce) => {
+app.controller('noticeDetailController', (noticeService, $scope, $routeParams, $sce, $location) => {
 
     console.log('noticeDetailController');
 
@@ -13,4 +13,8 @@ app.controller('noticeDetailController', (noticeService, $scope, $routeParams, $
                             console.log(error);
                         }
                     );
+
+    $scope.modifyView = () => {
+        $location.path(`notice/modify/${$routeParams.id}`);
+    };
 });

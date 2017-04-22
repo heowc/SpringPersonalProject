@@ -6,6 +6,7 @@ import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +21,14 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Page<Notice> findNoticePaging(Integer page, String type, String keyword) {
         if("title".equals(type)) {
-            return noticeRepository.findByTitleContaining(keyword, new PageRequest(page, 10));
+            return noticeRepository.findByTitleContaining(
+                    keyword,
+                    new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
         }
         if("content".equals(type)) {
-            return noticeRepository.findByContentContaining(keyword, new PageRequest(page, 10));
+            return noticeRepository.findByContentContaining(
+                    keyword,
+                    new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
         }
         return noticeRepository.findAll(new PageRequest(page, 10));
     }

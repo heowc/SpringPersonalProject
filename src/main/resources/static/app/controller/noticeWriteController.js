@@ -24,7 +24,6 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
     };
 
     $scope.save = () => {
-        console.log($scope.text);
 
         let notice = {
             title   : $scope.title,

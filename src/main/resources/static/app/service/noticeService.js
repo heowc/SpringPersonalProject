@@ -16,6 +16,10 @@ app.factory('noticeService', ($http) => {
 
         create : (notice) => {
             return $http.post('api/notice', notice);
+        },
+
+        update : (notice) => {
+            return $http.put('api/notice', notice);
         }
     };
 });

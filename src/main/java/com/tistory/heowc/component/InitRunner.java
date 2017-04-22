@@ -20,7 +20,7 @@ public class InitRunner implements CommandLineRunner {
 
         IntStream.range(0,55)
                 .forEach(value -> noticeService.insert(new Notice("Spring Personal Project",
-                        "Spring Personal Project",
-                        "won chul")));
+                                                                    "Spring Personal Project",
+                                                                    "won chul")));
     }
 }

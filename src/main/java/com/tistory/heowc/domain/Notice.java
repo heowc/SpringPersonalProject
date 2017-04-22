@@ -32,10 +32,10 @@ public class Notice implements Serializable {
     @Column(name = "CONTENT") @NotNull
     private String content;
 
-    @Column(name = "CREATE_DATETIME") @NotNull
+    @Column(name = "CREATE_DATETIME")
     private LocalDateTime createDateTime;
 
-    @Column(name = "MODIFY_DATETIME") @NotNull
+    @Column(name = "MODIFY_DATETIME")
     private LocalDateTime modifyDateTime;
 
     @Column(name = "WRITER") @NotNull
