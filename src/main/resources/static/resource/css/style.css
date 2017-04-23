@@ -8,3 +8,7 @@ textarea {
     min-width: 300px;
 
 }
+
+td {
+    vertical-align: middle !important;
+}

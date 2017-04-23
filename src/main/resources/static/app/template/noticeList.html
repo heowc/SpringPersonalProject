@@ -1,10 +1,9 @@
-<div id="notice-area" ng-controller="noticeListController" ng-init="noticeSearch(0)">
+<div id="notice-area" ng-controller="noticeListController">
 
-    <form class="form-inline" ng-submit="noticeSearch()">
+    <form class="form-inline">
         <div class="form-group">
             <select class="form-control" ng-model="selectedType"
                     ng-options="type.name for type in types"></select>
-            &nbsp:&nbsp
             <input class="form-control" type="text" ng-model="keyword">
         </div>
     </form>
@@ -35,5 +34,6 @@
         ng-model="bigCurrentPage"
         max-size="maxSize"
         class="pagination-sm"
-        boundary-link-numbers="true"></ul>
+        boundary-link-numbers="true">
+    </ul>
 </div>

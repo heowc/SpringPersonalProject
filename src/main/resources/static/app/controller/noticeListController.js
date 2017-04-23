@@ -22,14 +22,14 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
 
     $scope.delete = (index) => {
         noticeService.deleteById($scope.notices[index].idx)
-                    .then(
-                        (response) => {
-                            $scope.noticeSearch($scope.bigCurrentPage);
-                        },
-                        (error) => {
-                            console.log(error);
-                        }
-                    );
+            .then(
+                (response) => {
+                    $scope.noticeSearch($scope.bigCurrentPage);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
     };
 
     $scope.noticeSearch = (page) => {
@@ -45,10 +45,12 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
     };
 
     const setNoticeListView = (data) => {
-        console.log(data);
         $scope.bigTotalItems = data.totalElements;
-        $scope.bigCurrentPage = data.number + 1;
         $scope.maxSize = 5;
         $scope.notices = data.content;
-    }
+    };
+
+    $scope.$watch('bigCurrentPage', (newValue, oldValue) => {
+        $scope.noticeSearch($scope.bigCurrentPage-1);
+    }, true);
 });
