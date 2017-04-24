@@ -45,7 +45,6 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
     };
 
     const setNoticeListView = (data) => {
-        console.log(data);
         $scope.bigTotalItems = data.totalElements;
         $scope.maxSize = 5;
         $scope.notices = data.content;
