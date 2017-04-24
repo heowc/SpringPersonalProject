@@ -1,6 +1,7 @@
 package com.tistory.heowc.service.impl;
 
 import com.tistory.heowc.domain.Notice;
+import com.tistory.heowc.repository.MemberRepository;
 import com.tistory.heowc.repository.NoticeRepository;
 import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired NoticeRepository noticeRepository;
+    @Autowired MemberRepository memberRepository;
 
     @Override
     public Page<Notice> findNoticePaging(Integer page, String type, String keyword) {
@@ -30,7 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
                     keyword,
                     new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
         }
-        return noticeRepository.findAll(new PageRequest(page, 10));
+        return noticeRepository.findAll(new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
     }
 
     @Override

@@ -1,6 +1,6 @@
 <div id="notice-area" ng-controller="noticeListController">
 
-    <form class="form-inline">
+    <form class="form-inline" ng-submit="noticeSearch(0)">
         <div class="form-group">
             <select class="form-control" ng-model="selectedType"
                     ng-options="type.name for type in types"></select>
@@ -20,7 +20,7 @@
         <tbody>
             <tr ng-repeat="notice in notices"  >
                 <td ng-click="detail($index)">{{notice.title}}</td>
-                <td>{{notice.writer}}</td>
+                <td>{{notice.member.email}}</td>
                 <td>{{notice.createDateTime | date : 'yyyy-MM-dd' : timezone}}</td>
                 <td>
                     <button class="btn btn-warning btn-sm" ng-click="delete($index)">Delete</button>

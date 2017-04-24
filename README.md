@@ -14,10 +14,14 @@ Personal project using Spring Boot
 * Angular 1.6.4.RELEASE
 * Bootstrap 4.0.0-alpha.6
 
-## plugin
+## Plugin
 
 * Summernote 0.8.2
 
 # Database
 
 * H2 1.4.193
+
+## ERD
+
+![alt tag](./erd.png)

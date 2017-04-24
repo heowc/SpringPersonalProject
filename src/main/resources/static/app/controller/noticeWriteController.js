@@ -5,17 +5,6 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
     console.log('noticeWriteController');
 
     $scope.options = {
-        // toolbar: [
-        //     ['style', ['bold', 'italic', 'underline', 'clear']],
-        //     ['fontsize', ['fontsize']],
-        //     ['color', ['color']],
-        //     ['para', ['ul', 'ol', 'paragraph']],
-        //     ['height', ['height']],
-        //     ['saveButton', ['save']]
-        // ],
-        // buttons: {
-        //     save: SaveButton
-        // },
         popover: {
             image: [],
             link: [],
@@ -28,7 +17,9 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
         let notice = {
             title   : $scope.title,
             content : $scope.content,
-            writer  : 'heowc'
+            member  : {
+                email : 'heowc1992@gmail.com'
+            }
         };
 
         if($scope.content.length > 0) {
