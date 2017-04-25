@@ -32,7 +32,8 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
         Member member = getMember(request);
         if (member != null) {
-            return new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPassword());
+            return getAuthenticationManager()
+                    .authenticate(new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPassword()));
         } else {
             throw new InternalAuthenticationServiceException("Not Serializable Exception");
         }

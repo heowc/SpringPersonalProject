@@ -16,12 +16,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         Member member = memberRepository.findOne(username);
 
         if(member == null) {
             throw new UsernameNotFoundException(username + "is not found");
         }
-        return new User(username, member.getPassword(), AuthorityUtils.createAuthorityList("USER"));
+
+        return new User(member.getEmail(),
+                        member.getPassword(),
+                        AuthorityUtils.createAuthorityList("USER"));
     }
 }

@@ -23,7 +23,7 @@ public class LoginAuthenticationHandler implements AuthenticationSuccessHandler,
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-
+        response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() +";");
         response.getWriter().write(objectMapper.writeValueAsString(authentication.getPrincipal()));
     }
 

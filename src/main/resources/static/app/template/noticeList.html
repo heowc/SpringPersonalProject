@@ -1,5 +1,7 @@
 <div id="notice-area" ng-controller="noticeListController">
 
+    <button class="btn btn-primary pull-right" ng-click="loginModal()">Login</button>
+
     <form class="form-inline" ng-submit="noticeSearch(0)">
         <div class="form-group">
             <select class="form-control" ng-model="selectedType"
@@ -18,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="notice in notices"  >
+            <tr ng-repeat="notice in notices">
                 <td ng-click="detail($index)">{{notice.title}}</td>
                 <td>{{notice.member.email}}</td>
                 <td>{{notice.createDateTime | date : 'yyyy-MM-dd' : timezone}}</td>

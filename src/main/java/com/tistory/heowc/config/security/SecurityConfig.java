@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -19,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired ObjectMapper objectMapper;
     @Autowired PasswordEncoder passwordEncoder;
-    @Autowired LoginAuthenticationProvider loginAuthenticationProvider;
+//    @Autowired LoginAuthenticationProvider loginAuthenticationProvider;
     @Autowired LoginAuthenticationHandler loginAuthenticationHandler;
 
     private static final String BASE_END_POINT = "/notice";
@@ -43,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers(BASE_END_POINT, LOGOUT_END_POINT, LOGIN_END_POINT).permitAll()
                 .antMatchers(HttpMethod.POST, JOIN_END_POINT).permitAll()
-//    			.antMatchers("/**").authenticated()
+    			.antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
     		.formLogin()
@@ -58,19 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		.csrf().disable();
     }
 
-    private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter() {
-        return new LoginAuthenticationFilter(objectMapper, loginAuthenticationHandler);
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(loginAuthenticationProvider)
-            .userDetailsService(userDetailsService())
-            .passwordEncoder(passwordEncoder);
-    }
-
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+    private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter() throws Exception {
+        UsernamePasswordAuthenticationFilter filter = new LoginAuthenticationFilter(objectMapper, loginAuthenticationHandler);
+        filter.setAuthenticationManager(authenticationManager());
+        return filter;
     }
 }

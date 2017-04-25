@@ -6,16 +6,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoginAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired UserDetailsService userDetailsService;
+    @Autowired UserDetailsServiceImpl userDetailsService;
     @Autowired PasswordEncoder passwordEncoder;
 
     @Override
@@ -28,8 +26,8 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
         if( !isMatches(password, userDetails.getPassword()) ) {
             throw new BadCredentialsException("Bad Credentials Exception");
         }
-        return new UsernamePasswordAuthenticationToken(email, password,
-                                                        AuthorityUtils.createAuthorityList("USER"));
+
+        return new UsernamePasswordAuthenticationToken(email, password, userDetails.getAuthorities());
     }
 
     @Override
