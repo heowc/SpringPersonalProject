@@ -46,6 +46,7 @@ dependencies {
 	compile('org.webjars.bower:angular:1.6.4')
 	compile('org.webjars.bower:angular-route:1.6.4')
 	compile('org.webjars.bower:angular-sanitize:1.6.4')
+	compile('org.webjars.bower:angular-cookies:1.6.4')
 	compile('org.webjars.bower:angular-bootstrap:2.5.0')
 	compile('org.webjars.bower:angular-summernote:0.8.1')
 	

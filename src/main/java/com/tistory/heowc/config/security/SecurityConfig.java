@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String RESOURCE_END_POINT = "/resources/**";
     private static final String WEBJARS_END_POINT = "/webjars/**";
     private static final String APP_END_POINT = "/app/**";
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(RESOURCE_END_POINT, WEBJARS_END_POINT, APP_END_POINT);
@@ -42,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers(BASE_END_POINT, LOGOUT_END_POINT, LOGIN_END_POINT).permitAll()
                 .antMatchers(HttpMethod.POST, JOIN_END_POINT).permitAll()
-    			.antMatchers("/**").authenticated()
+//    			.antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .and()
     		.formLogin()
                 .loginPage(BASE_END_POINT)
