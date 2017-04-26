@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeListController', (noticeService, uibDateParser, $scope, $location, $uibModal, $rootScope) => {
+app.controller('noticeListController', (noticeService, modalService, uibDateParser, $scope, $location) => {
 
     console.log('noticeListController');
 
@@ -54,13 +54,7 @@ app.controller('noticeListController', (noticeService, uibDateParser, $scope, $l
         $scope.noticeSearch($scope.bigCurrentPage-1);
     }, true);
 
-    $scope.loginModal = () => {
-        $uibModal.open({
-            animation: true,
-            component : 'loginFormModalComponent',
-            resolve: {
-
-            }
-        });
+    $scope.openLoginModal = () => {
+        modalService.openLoginModal();
     };
 });

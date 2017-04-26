@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginFormController', (memberService, $scope) => {
+app.controller('loginFormController', (memberService, modalService, $scope, $uibModal, $timeout, $route) => {
 
     console.log('loginFormController');
 
@@ -13,6 +13,7 @@ app.controller('loginFormController', (memberService, $scope) => {
         memberService.login($scope.member)
             .then(
                 (response) => {
+                    modalService.closeLoginModal();
                 },
                 (error) => {
                     console.log(error);

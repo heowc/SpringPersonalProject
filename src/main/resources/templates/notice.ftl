@@ -26,6 +26,7 @@
     <script type="application/javascript" src="/app/config/routeConfig.js"></script><#--all-->
     <script type="application/javascript" src="/app/service/noticeService.js"></script>
     <script type="application/javascript" src="/app/service/memberService.js"></script>
+    <script type="application/javascript" src="/app/service/modalService.js"></script>
     <script type="application/javascript" src="/app/controller/noticeListController.js"></script>
     <script type="application/javascript" src="/app/controller/noticeWriteController.js"></script>
     <script type="application/javascript" src="/app/controller/noticeDetailController.js"></script>
