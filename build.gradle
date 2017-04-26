@@ -3,12 +3,10 @@ buildscript {
 		springBootVersion = '1.5.2.RELEASE'
 	}
 	repositories {
-		jcenter()
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.springframework:springloaded:1.2.5.RELEASE'
 	}
 }
 
@@ -24,14 +22,9 @@ repositories {
 	mavenCentral()
 }
 
-idea {
-	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main/")
-	}
-}
-
 dependencies {
+	compile("org.springframework.boot:spring-boot-devtools")
+
 	compile('org.hibernate:hibernate-java8:5.0.12.Final')
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr2')
 
