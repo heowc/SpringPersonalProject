@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginFormController', (memberService, modalService, $scope, $uibModal, $timeout, $route) => {
+app.controller('loginFormController', (memberService, modalService, $scope) => {
 
     console.log('loginFormController');
 
@@ -20,4 +20,10 @@ app.controller('loginFormController', (memberService, modalService, $scope, $uib
                 }
             );
     };
+
+    $scope.openJoinModal = () => {
+        modalService.closeLoginModal();
+        modalService.openJoinModal();
+    };
+
 });

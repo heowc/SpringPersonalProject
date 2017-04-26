@@ -29,6 +29,10 @@ public class Member implements Serializable {
 
     public Member() {}
 
+    public Member(String email) {
+        this.email = email;
+    }
+
     public Member(String email, String password) {
         this.email = email;
         this.password = password;

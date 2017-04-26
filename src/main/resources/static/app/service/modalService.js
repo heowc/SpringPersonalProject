@@ -4,7 +4,7 @@ app.factory('modalService', ($http, $uibModal, $route, $timeout) => {
     var modal;
 
     return {
-       openLoginModal : () => {
+        openLoginModal : () => {
             modal = $uibModal.open({
                 animation: true,
                 component : 'loginFormModalComponent'
@@ -12,6 +12,21 @@ app.factory('modalService', ($http, $uibModal, $route, $timeout) => {
         },
 
         closeLoginModal : () => {
+            modal.dismiss();
+
+            $timeout(() => {
+                $route.reload();
+            }, 500);
+        },
+
+        openJoinModal : () => {
+            modal = $uibModal.open({
+                animation: true,
+                component : 'joinFormModalComponent'
+            });
+        },
+
+        closeJoinModal : () => {
             modal.dismiss();
 
             $timeout(() => {

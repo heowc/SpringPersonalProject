@@ -16,10 +16,7 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
 
         let notice = {
             title   : $scope.title,
-            content : $scope.content,
-            member  : {
-                email : 'heowc1992@gmail.com'
-            }
+            content : $scope.content
         };
 
         if($scope.content.length > 0) {

@@ -34,9 +34,8 @@ public class Notice implements Serializable {
 
     public Notice() {}
 
-    public Notice(String title, String content, Member member) {
+    public Notice(String title, String content) {
         this.title = title;
         this.content = content;
-        this.member = member;
     }
 }

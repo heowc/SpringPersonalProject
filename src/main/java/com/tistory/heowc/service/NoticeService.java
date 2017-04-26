@@ -9,7 +9,7 @@ public interface NoticeService {
     Page<NoticeDto.Notice> findNoticePaging(Integer page, String type, String keyword);
     Notice findNoticeById(Long idx);
 
-    void insert(Notice content);
+    void insert(Notice content, String email);
     void delete(Long idx);
     void update(Notice notice);
 }

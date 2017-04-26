@@ -23,6 +23,7 @@ public class InitRunner implements CommandLineRunner {
         final Member member = memberService.validAndSave(new Member("heowc1992@gmail.com", "1234"));
 
         IntStream.range(0, 15)
-                .forEach(value -> noticeService.insert(new Notice("title", "content", member)));
+                .forEach(value -> noticeService.insert(new Notice("title", "content"),
+                                                        member.getEmail()));
     }
 }

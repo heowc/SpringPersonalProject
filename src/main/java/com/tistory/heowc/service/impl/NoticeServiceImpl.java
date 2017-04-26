@@ -1,5 +1,6 @@
 package com.tistory.heowc.service.impl;
 
+import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.domain.Notice;
 import com.tistory.heowc.domain.mapper.NoticeDto;
 import com.tistory.heowc.repository.NoticeRepository;
@@ -34,9 +35,10 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void insert(Notice notice) {
+    public void insert(Notice notice, String email) {
         notice.setCreateDateTime(LocalDateTime.now());
         notice.setModifyDateTime(LocalDateTime.now());
+        notice.setMember(new Member(email));
         noticeRepository.save(notice);
     }
 
