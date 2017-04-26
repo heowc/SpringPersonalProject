@@ -29,6 +29,24 @@ public class NoticeServiceImpl implements NoticeService {
                 .map(notice -> modelMapper.map(notice, NoticeDto.Notice.class));
     }
 
+    private Page<Notice> findNoticeByConditions(Integer page, String type, String keyword) {
+        if("title".equals(type)) {
+            return noticeRepository.findByTitleContaining(
+                    keyword,
+                    pageRequestByPage(page));
+        }
+        if("content".equals(type)) {
+            return noticeRepository.findByContentContaining(
+                    keyword,
+                    pageRequestByPage(page));
+        }
+        return noticeRepository.findAll(pageRequestByPage(page));
+    }
+
+    private PageRequest pageRequestByPage(int page) {
+        return new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime"));
+    }
+
     @Override
     public Notice findNoticeById(Long idx) {
         return noticeRepository.findOne(idx);
@@ -51,23 +69,5 @@ public class NoticeServiceImpl implements NoticeService {
     public void update(Notice notice) {
         notice.setModifyDateTime(LocalDateTime.now());
         noticeRepository.save(notice);
-    }
-
-    private Page<Notice> findNoticeByConditions(Integer page, String type, String keyword) {
-        if("title".equals(type)) {
-            return noticeRepository.findByTitleContaining(
-                                        keyword,
-                                        pageRequestByPage(page));
-        }
-        if("content".equals(type)) {
-            return noticeRepository.findByContentContaining(
-                                        keyword,
-                                        pageRequestByPage(page));
-        }
-        return noticeRepository.findAll(pageRequestByPage(page));
-    }
-
-    private PageRequest pageRequestByPage(int page) {
-        return new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime"));
     }
 }
