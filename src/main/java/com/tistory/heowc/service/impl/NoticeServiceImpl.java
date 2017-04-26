@@ -1,9 +1,10 @@
 package com.tistory.heowc.service.impl;
 
 import com.tistory.heowc.domain.Notice;
-import com.tistory.heowc.repository.MemberRepository;
+import com.tistory.heowc.domain.mapper.NoticeDto;
 import com.tistory.heowc.repository.NoticeRepository;
 import com.tistory.heowc.service.NoticeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,21 +19,13 @@ import java.time.LocalDateTime;
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired NoticeRepository noticeRepository;
-    @Autowired MemberRepository memberRepository;
+
+    @Autowired ModelMapper modelMapper;
 
     @Override
-    public Page<Notice> findNoticePaging(Integer page, String type, String keyword) {
-        if("title".equals(type)) {
-            return noticeRepository.findByTitleContaining(
-                    keyword,
-                    new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
-        }
-        if("content".equals(type)) {
-            return noticeRepository.findByContentContaining(
-                    keyword,
-                    new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
-        }
-        return noticeRepository.findAll(new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime")));
+    public Page<NoticeDto.Notice> findNoticePaging(Integer page, String type, String keyword) {
+        return findNoticeByConditions(page, type, keyword)
+                .map(notice -> modelMapper.map(notice, NoticeDto.Notice.class));
     }
 
     @Override
@@ -56,5 +49,23 @@ public class NoticeServiceImpl implements NoticeService {
     public void update(Notice notice) {
         notice.setModifyDateTime(LocalDateTime.now());
         noticeRepository.save(notice);
+    }
+
+    private Page<Notice> findNoticeByConditions(Integer page, String type, String keyword) {
+        if("title".equals(type)) {
+            return noticeRepository.findByTitleContaining(
+                                        keyword,
+                                        pageRequestByPage(page));
+        }
+        if("content".equals(type)) {
+            return noticeRepository.findByContentContaining(
+                                        keyword,
+                                        pageRequestByPage(page));
+        }
+        return noticeRepository.findAll(pageRequestByPage(page));
+    }
+
+    private PageRequest pageRequestByPage(int page) {
+        return new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "createDateTime"));
     }
 }
