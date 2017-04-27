@@ -6,6 +6,10 @@ app.factory('memberService', ($http) => {
             return $http.post(`login`, member);
         },
 
+        logout : () => {
+            return $http.get(`logout`);
+        },
+
         join : (member) => {
             return $http.post(`api/member`, member);
         }

@@ -5,6 +5,7 @@ import com.tistory.heowc.domain.mapper.NoticeDto;
 import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class NoticeController {
         service.delete(idx);
     }
 
+    @PreAuthorize("(#notice.member.email == principal.username)")
     @PutMapping
     public void update(@RequestBody Notice notice) {
         service.update(notice);

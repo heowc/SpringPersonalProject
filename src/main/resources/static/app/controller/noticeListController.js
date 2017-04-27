@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('noticeListController', (noticeService, modalService, uibDateParser, $scope, $location) => {
+app.controller('noticeListController', (noticeService, modalService, memberService, uibDateParser,
+                                        $scope, $location, $cookies, $route) => {
 
     console.log('noticeListController');
 
@@ -15,6 +16,17 @@ app.controller('noticeListController', (noticeService, modalService, uibDatePars
         }];
 
     $scope.selectedType = $scope.types[0];
+
+    $scope.init = () => {
+        console.log('init');
+        if ( $cookies.get('id') !== undefined) {
+            $scope.isAutentication = true;
+            $scope.btnName = 'Logout';
+        } else {
+            $scope.isAutentication = false;
+            $scope.btnName = 'Login';
+        }
+    };
 
     $scope.detail = (index) => {
         $location.path(`notice/detail/${$scope.notices[index].idx}`);
@@ -54,7 +66,21 @@ app.controller('noticeListController', (noticeService, modalService, uibDatePars
         $scope.noticeSearch($scope.bigCurrentPage-1);
     }, true);
 
+    $scope.clickBtn = () => {
+        if ( $scope.isAutentication ) {
+            $scope.logout();
+        } else {
+            $scope.openLoginModal();
+        }
+    };
+
     $scope.openLoginModal = () => {
         modalService.openLoginModal();
     };
+
+    $scope.logout = () => {
+        $cookies.remove('id');
+        memberService.logout();
+        $route.reload();
+    }
 });

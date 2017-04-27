@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginFormController', (memberService, modalService, $scope) => {
+app.controller('loginFormController', (memberService, modalService, $scope, $cookies) => {
 
     console.log('loginFormController');
 
@@ -13,7 +13,10 @@ app.controller('loginFormController', (memberService, modalService, $scope) => {
         memberService.login($scope.member)
             .then(
                 (response) => {
-                    modalService.closeLoginModal();
+                    if( response.data !== '' ) {
+                        $cookies.put('id', response.data.email);
+                        modalService.closeLoginModal();
+                    }
                 },
                 (error) => {
                     console.log(error);

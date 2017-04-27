@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeModifyController', (noticeService, $scope, $location, $routeParams, $sce) => {
+app.controller('noticeModifyController', (noticeService, $scope, $location, $routeParams, $cookies) => {
 
     console.log('noticeModifyController');
 
@@ -24,6 +24,11 @@ app.controller('noticeModifyController', (noticeService, $scope, $location, $rou
 
     $scope.modify = () => {
 
+        if( !isAuthentication($cookies, $scope.notice.member.email) ) {
+            alert('warning!!');
+            return;
+        }
+
         if($scope.notice.content.length > 0) {
             noticeService.update($scope.notice)
                 .then(
@@ -32,7 +37,7 @@ app.controller('noticeModifyController', (noticeService, $scope, $location, $rou
                         $location.path('notice');
                     },
                     (error) => {
-                        console.log(error);
+                        alert(error.data.message);
                     }
                 );
         }

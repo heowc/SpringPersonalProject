@@ -1,6 +1,6 @@
-<div id="notice-area" ng-controller="noticeListController">
+<div id="notice-area" ng-controller="noticeListController" ng-init="init()">
 
-    <button class="btn btn-primary pull-right" ng-click="openLoginModal()">Login</button>
+    <button class="btn btn-primary pull-right" ng-click="clickBtn()">{{btnName}}</button>
 
     <form class="form-inline" ng-submit="noticeSearch(0)">
         <div class="form-group">

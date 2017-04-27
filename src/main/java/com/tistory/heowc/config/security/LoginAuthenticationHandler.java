@@ -1,6 +1,7 @@
 package com.tistory.heowc.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -24,7 +25,7 @@ public class LoginAuthenticationHandler implements AuthenticationSuccessHandler,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() +"; HttpOnly");
-//        response.getWriter().write(objectMapper.writeValueAsString(authentication.getPrincipal()));
+        response.getWriter().write(objectMapper.writeValueAsString(new Member((String) authentication.getPrincipal())));
     }
 
     @Override
