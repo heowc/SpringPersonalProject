@@ -18,7 +18,6 @@ app.controller('noticeListController', (noticeService, modalService, memberServi
     $scope.selectedType = $scope.types[0];
 
     $scope.init = () => {
-        console.log('init');
         if ( $cookies.get('id') !== undefined) {
             $scope.isAutentication = true;
             $scope.btnName = 'Logout';

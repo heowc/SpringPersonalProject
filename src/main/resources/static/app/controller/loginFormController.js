@@ -14,7 +14,9 @@ app.controller('loginFormController', (memberService, modalService, $scope, $coo
             .then(
                 (response) => {
                     if( response.data !== '' ) {
-                        $cookies.put('id', response.data.email);
+                        let expireDate = new Date();
+                        expireDate.setDate(expireDate.getDate() + 1000 * 60 * 20);
+                        $cookies.put('id', response.data.email, { expires : expireDate});
                         modalService.closeLoginModal();
                     }
                 },
