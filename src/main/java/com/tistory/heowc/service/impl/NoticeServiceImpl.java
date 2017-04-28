@@ -64,8 +64,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void delete(Long idx, Authentication authentication) throws AccessDeniedException {
-        Notice notice = noticeRepository.findOne(idx);
-        if ( !isMatchOwner(notice.getMember(), authentication) ) {
+        if ( !matchByIdxAndPrincipal(idx, (String) authentication.getPrincipal()) ) {
             throw new AccessDeniedException("접근이 거부 되었습니다.");
         }
         noticeRepository.delete(idx);
@@ -77,7 +76,8 @@ public class NoticeServiceImpl implements NoticeService {
         noticeRepository.save(notice);
     }
 
-    private boolean isMatchOwner(Member member, Authentication authentication) {
-        return authentication.getPrincipal().equals(member.getEmail());
+    private boolean matchByIdxAndPrincipal(Long idx, String principal) {
+        Notice notice = noticeRepository.findOne(idx);
+        return principal.equals(notice.getMember().getEmail());
     }
 }
