@@ -38,7 +38,7 @@ app.controller('noticeListController', (noticeService, modalService, memberServi
                     $scope.noticeSearch($scope.bigCurrentPage);
                 },
                 (error) => {
-                    console.log(error);
+                    alert(error.data.message);
                 }
             );
     };

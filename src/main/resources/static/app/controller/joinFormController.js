@@ -17,7 +17,7 @@ app.controller('joinFormController', (memberService, modalService, $scope) => {
                     modalService.closeJoinModal();
                 },
                 (error) => {
-                    console.log(error);
+                    alert(error.data.message);
                 }
             );
     };

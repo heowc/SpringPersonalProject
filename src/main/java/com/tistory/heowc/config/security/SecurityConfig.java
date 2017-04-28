@@ -18,6 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired ObjectMapper objectMapper;
     @Autowired LoginAuthenticationHandler loginAuthenticationHandler;
+    @Autowired LogoutHandler logoutHandler;
 
     private static final String BASE_END_POINT = "/notice";
     private static final String LOGIN_END_POINT = "/login";
@@ -49,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
     		.logout()
                 .logoutUrl(LOGOUT_END_POINT)
-                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler(logoutHandler)
                 .invalidateHttpSession(true)
                 .and()
     		.csrf().disable();

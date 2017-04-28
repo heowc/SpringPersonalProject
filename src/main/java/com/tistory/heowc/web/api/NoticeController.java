@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
+
 @RestController
 @RequestMapping("api/notice")
 public class NoticeController {
@@ -33,8 +35,8 @@ public class NoticeController {
     }
 
     @DeleteMapping("{idx}")
-    public void delete(@PathVariable Long idx) {
-        service.delete(idx);
+    public void delete(@PathVariable Long idx, Authentication authentication) throws AccessDeniedException {
+        service.delete(idx, authentication);
     }
 
     @PreAuthorize("(#notice.member.email == principal.username)")

@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 
 @Service
@@ -61,7 +63,11 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void delete(Long idx) {
+    public void delete(Long idx, Authentication authentication) throws AccessDeniedException {
+        Notice notice = noticeRepository.findOne(idx);
+        if ( !isMatchOwner(notice.getMember(), authentication) ) {
+            throw new AccessDeniedException("접근이 거부 되었습니다.");
+        }
         noticeRepository.delete(idx);
     }
 
@@ -69,5 +75,9 @@ public class NoticeServiceImpl implements NoticeService {
     public void update(Notice notice) {
         notice.setModifyDateTime(LocalDateTime.now());
         noticeRepository.save(notice);
+    }
+
+    private boolean isMatchOwner(Member member, Authentication authentication) {
+        return authentication.getPrincipal().equals(member.getEmail());
     }
 }

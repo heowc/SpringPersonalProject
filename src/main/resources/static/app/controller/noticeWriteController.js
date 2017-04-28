@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('noticeWriteController', (noticeService, $scope, $location) => {
+app.controller('noticeWriteController', (noticeService, $scope, $location, $cookies) => {
 
     console.log('noticeWriteController');
 
@@ -14,12 +14,17 @@ app.controller('noticeWriteController', (noticeService, $scope, $location) => {
 
     $scope.save = () => {
 
+        if( !isAuthentication($cookies) ) {
+            alert('can not write!!');
+            return;
+        }
+
         let notice = {
             title   : $scope.title,
             content : $scope.content
         };
 
-        if($scope.content.length > 0) {
+        if($scope.notice.content.length > 0) {
             noticeService.create(notice)
                 .then(
                     (response) => {
