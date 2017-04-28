@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +34,13 @@ public class NoticeServiceImpl implements NoticeService {
     private Page<Notice> findNoticeByConditions(Integer page, String type, String keyword) {
         if("title".equals(type)) {
             return noticeRepository.findByTitleContaining(
-                    keyword,
-                    pageRequestByPage(page));
+                                        keyword,
+                                        pageRequestByPage(page));
         }
         if("content".equals(type)) {
             return noticeRepository.findByContentContaining(
-                    keyword,
-                    pageRequestByPage(page));
+                                        keyword,
+                                        pageRequestByPage(page));
         }
         return noticeRepository.findAll(pageRequestByPage(page));
     }
@@ -55,16 +55,18 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void insert(Notice notice, String email) {
+    public void insert(Notice notice) {
         notice.setCreateDateTime(LocalDateTime.now());
         notice.setModifyDateTime(LocalDateTime.now());
-        notice.setMember(new Member(email));
+        notice.setMember(new Member((String) SecurityContextHolder.getContext()
+                                                                    .getAuthentication().getPrincipal()));
         noticeRepository.save(notice);
     }
 
     @Override
-    public void delete(Long idx, Authentication authentication) throws AccessDeniedException {
-        if ( !matchByIdxAndPrincipal(idx, (String) authentication.getPrincipal()) ) {
+    public void delete(Long idx) throws AccessDeniedException {
+        if ( !matchByIdxAndPrincipal(idx, SecurityContextHolder.getContext()
+                                                                .getAuthentication().getPrincipal()) ) {
             throw new AccessDeniedException("접근이 거부 되었습니다.");
         }
         noticeRepository.delete(idx);
@@ -76,7 +78,7 @@ public class NoticeServiceImpl implements NoticeService {
         noticeRepository.save(notice);
     }
 
-    private boolean matchByIdxAndPrincipal(Long idx, String principal) {
+    private boolean matchByIdxAndPrincipal(Long idx, Object principal) {
         Notice notice = noticeRepository.findOne(idx);
         return principal.equals(notice.getMember().getEmail());
     }

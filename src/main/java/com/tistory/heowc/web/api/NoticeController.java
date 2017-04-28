@@ -6,7 +6,6 @@ import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
@@ -30,13 +29,13 @@ public class NoticeController {
     }
 
     @PostMapping
-    public void insert(@RequestBody Notice notice, Authentication authentication) {
-        service.insert(notice, (String) authentication.getPrincipal());
+    public void insert(@RequestBody Notice notice) {
+        service.insert(notice);
     }
 
     @DeleteMapping("{idx}")
-    public void delete(@PathVariable Long idx, Authentication authentication) throws AccessDeniedException {
-        service.delete(idx, authentication);
+    public void delete(@PathVariable Long idx) throws AccessDeniedException {
+        service.delete(idx);
     }
 
     @PreAuthorize("(#notice.member.email == principal.username)")
