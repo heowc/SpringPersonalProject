@@ -8,6 +8,10 @@ Personal project using Spring Boot
 * Spring Security 4.2.2.RELEASE
 * Data-JPA 1.5.3.RELEASE ( Hibernate 5.0.12.Final )
 
+## Servlet Container
+
+* Undertow 1.4.11.Final
+
 # Front-End
 
 * Freemarker 1.5.2.RELEASE
