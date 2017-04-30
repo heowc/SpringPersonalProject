@@ -5,18 +5,16 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 public class NoticeDto {
 
-    @Data
-    public static class Notice {
-        private Long idx;
+    private Long idx;
 
-        private String title;
+    private String title;
 
-        private LocalDateTime createDateTime;
+    private LocalDateTime createDateTime;
 
-        private LocalDateTime modifyDateTime;
+    private LocalDateTime modifyDateTime;
 
-        private Member member;
-    }
+    private Member member;
 }

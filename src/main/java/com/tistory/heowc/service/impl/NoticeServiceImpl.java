@@ -26,9 +26,9 @@ public class NoticeServiceImpl implements NoticeService {
     @Autowired ModelMapper modelMapper;
 
     @Override
-    public Page<NoticeDto.Notice> findNoticePaging(Integer page, String type, String keyword) {
+    public Page<NoticeDto> findNoticePaging(Integer page, String type, String keyword) {
         return findNoticeByConditions(page, type, keyword)
-                .map(notice -> modelMapper.map(notice, NoticeDto.Notice.class));
+                .map(notice -> modelMapper.map(notice, NoticeDto.class));
     }
 
     private Page<Notice> findNoticeByConditions(Integer page, String type, String keyword) {

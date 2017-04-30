@@ -17,7 +17,7 @@ public class NoticeController {
     @Autowired NoticeService service;
 
     @GetMapping("search")
-    public Page<NoticeDto.Notice> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
+    public Page<NoticeDto> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
                                                   @RequestParam(required = false, defaultValue = "")  String  type,
                                                   @RequestParam(required = false, defaultValue = "")  String  keyword) {
         return service.findNoticePaging(page, type, keyword);
