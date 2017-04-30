@@ -58,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter() throws Exception {
-        UsernamePasswordAuthenticationFilter filter = new LoginAuthenticationFilter(objectMapper, loginAuthenticationHandler);
+        UsernamePasswordAuthenticationFilter filter =
+                new LoginAuthenticationFilter(objectMapper, loginAuthenticationHandler);
         filter.setAuthenticationManager(authenticationManager());
         return filter;
     }
