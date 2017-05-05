@@ -3,6 +3,8 @@ package com.tistory.heowc.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,9 +17,10 @@ import java.io.Serializable;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Member implements Serializable {
 
-    @Id
+    @Id @NotEmpty @Length(min = 5)
     private String email;
 
+    @NotEmpty @Length(min = 8)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 

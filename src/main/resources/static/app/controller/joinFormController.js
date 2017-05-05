@@ -17,7 +17,13 @@ app.controller('joinFormController', (memberService, modalService, $scope) => {
                     modalService.closeJoinModal();
                 },
                 (error) => {
-                    alert(error.data.message);
+                    if (error.status == 500) {
+                        alert(error.data.message);
+                    }
+
+                    if (error.status == 400) {
+                        alert(error.data.defaultMessage);
+                    }
                 }
             );
     };

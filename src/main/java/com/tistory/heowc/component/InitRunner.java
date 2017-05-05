@@ -20,7 +20,8 @@ public class InitRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final Member member = memberService.validAndSave(new Member("heowc1992@gmail.com", "1234"));
+        final Member member = memberService.validAndSave(new Member("heowc1992@gmail.com",
+                                                                    "123412341234"));
 
         IntStream.range(0, 15)
                 .forEach(value -> noticeRepository.save(getNotice(member)));

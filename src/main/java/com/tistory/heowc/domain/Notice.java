@@ -2,9 +2,9 @@ package com.tistory.heowc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -18,10 +18,10 @@ public class Notice implements Serializable {
     @Column(name = "NOTICE_IDX")
     private Long idx;
 
-    @NotNull
+    @NotEmpty
     private String title;
 
-    @NotNull
+    @NotEmpty
     private String content;
 
     private LocalDateTime createDateTime;
