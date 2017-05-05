@@ -2,6 +2,11 @@
 
 Personal project using Spring Boot
 
+# Build
+
+* VM options <p>
+<code>-Xbootclasspath/p:./alpn-boot-8.1.11.v20170118.jar</code>
+
 # Back-End
 
 * Spring Boot 1.5.3.RELEASE
