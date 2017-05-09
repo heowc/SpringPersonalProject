@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
@@ -17,12 +19,14 @@ public class MemberServiceImpl implements MemberService {
     @Autowired PasswordEncoder passwordEncoder;
 
     @Override
-    public Member validAndSave(Member member) throws DuplicateMemberException {
+    public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException {
+        member.toDecrypt();
+
         if( memberRepository.exists(member.getEmail()) ) {
             throw new DuplicateMemberException(member.getEmail() + "는 이미 사용 중인 Email 입니다.");
         }
 
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        return memberRepository.save(member);
+        return memberRepository.saveAndFlush(member);
     }
 }

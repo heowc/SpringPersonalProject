@@ -15,13 +15,17 @@ import java.util.stream.IntStream;
 @Transactional
 public class InitRunner implements CommandLineRunner {
 
-    @Autowired MemberService memberService;
+    @Autowired
+    MemberService memberService;
     @Autowired NoticeRepository noticeRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        final Member member = memberService.validAndSave(new Member("heowc1992@gmail.com",
-                                                                    "123412341234"));
+        Member member = new Member("heowc1992@gmail.com", "123412341234");
+
+        member.toEncrypt();
+
+        memberService.validAndSave(member);
 
         IntStream.range(0, 15)
                 .forEach(value -> noticeRepository.save(getNotice(member)));

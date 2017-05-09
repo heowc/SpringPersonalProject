@@ -3,7 +3,9 @@ package com.tistory.heowc.service;
 import com.tistory.heowc.domain.Member;
 import javassist.bytecode.DuplicateMemberException;
 
+import java.io.UnsupportedEncodingException;
+
 public interface MemberService {
 
-    public Member validAndSave(Member member) throws DuplicateMemberException;
+    public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException;
 }

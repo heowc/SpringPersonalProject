@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("api/member")
@@ -21,11 +22,12 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<?> saveMember(@Valid @RequestBody Member member,
-                                        BindingResult bindingResult) throws DuplicateMemberException {
-        while(bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest()
-                                .body(bindingResult.getAllErrors().get(0));
+                                        BindingResult bindingResult) throws DuplicateMemberException,
+                                                                            UnsupportedEncodingException {
+        if ( bindingResult.hasErrors() ) {
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
+
         return ResponseEntity.ok(memberService.validAndSave(member));
     }
 }

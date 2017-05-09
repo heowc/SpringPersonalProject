@@ -53,7 +53,9 @@ dependencies {
 	compile('org.webjars.bower:angular-cookies:1.6.4')
 	compile('org.webjars.bower:angular-bootstrap:2.5.0')
 	compile('org.webjars.bower:angular-summernote:0.8.1')
-	
+	compile('org.webjars.bower:crypto-js:3.1.8')
+
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test:4.2.2.RELEASE')
 }

@@ -6,10 +6,13 @@ app.controller('loginFormController', (memberService, modalService, $scope, $coo
 
     $scope.member = {
         email    : 'heowc1992@gmail.com',
-        password : '1234'
+        password : '123412341234'
     };
 
     $scope.login = () => {
+        console.log($scope.member);
+        encryptMember();
+        console.log($scope.member);
         memberService.login($scope.member)
             .then(
                 (response) => {
@@ -31,4 +34,13 @@ app.controller('loginFormController', (memberService, modalService, $scope, $coo
         modalService.openJoinModal();
     };
 
+    const encryptMember = () => {
+        $scope.member.email = toEncrypt($scope.member.email);
+        $scope.member.password = toEncrypt($scope.member.password);
+    };
+
+    const decryptMember = () => {
+        $scope.member.email = toDecrypt($scope.member.email);
+        $scope.member.password = toDecrypt($scope.member.password);
+    };
 });

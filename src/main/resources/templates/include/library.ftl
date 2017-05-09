@@ -27,3 +27,6 @@
 <script type="application/javascript" src="/app/controller/joinFormController.js"></script>
 <script type="application/javascript" src="/app/component/loginFormModalComponent.js"></script>
 <script type="application/javascript" src="/app/component/joinFormModalComponent.js"></script>
+
+<script type="application/javascript" src="/webjars/crypto-js/3.1.8/crypto-js.js"></script>
+<script type="application/javascript" src="/resource/js/crypto.js"></script>
