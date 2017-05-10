@@ -13,6 +13,7 @@
 <script type="application/javascript" src="/webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script><#--all-->
 <script type="application/javascript" src="/webjars/summernote/0.8.2/dist/summernote.min.js"></script>
 <script type="application/javascript" src="/webjars/angular-summernote/0.8.1/dist/angular-summernote.min.js"></script>
+<script type="application/javascript" src="/webjars/angular-utf8-base64/0.0.5/angular-utf8-base64.min.js"></script>
 <script type="application/javascript" src="/app/app.js"></script><#--all-->
 <script type="application/javascript" src="/app/config/httpConfig.js"></script><#--all-->
 <script type="application/javascript" src="/app/config/routeConfig.js"></script><#--all-->
@@ -27,6 +28,3 @@
 <script type="application/javascript" src="/app/controller/joinFormController.js"></script>
 <script type="application/javascript" src="/app/component/loginFormModalComponent.js"></script>
 <script type="application/javascript" src="/app/component/joinFormModalComponent.js"></script>
-
-<script type="application/javascript" src="/webjars/crypto-js/3.1.8/crypto-js.js"></script>
-<script type="application/javascript" src="/resource/js/crypto.js"></script>

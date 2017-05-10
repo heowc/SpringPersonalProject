@@ -2,10 +2,10 @@ package com.tistory.heowc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tistory.heowc.util.AES256Util;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,14 +44,12 @@ public class Member implements Serializable {
     }
 
     public void toEncrypt() throws UnsupportedEncodingException {
-        AES256Util aes256 = new AES256Util(AES256Util.SECRET_KEY);
-        email = aes256.toEncrypt(email);
-        password = aes256.toEncrypt(password);
+        email = new String(Base64.encode(email.getBytes()));
+        password = new String(Base64.encode(password.getBytes()));
     }
 
     public void toDecrypt() throws UnsupportedEncodingException {
-        AES256Util aes256 = new AES256Util(AES256Util.SECRET_KEY);
-        email = aes256.toDecrypt(email);
-        password = aes256.toDecrypt(password);
+        email = new String(Base64.decode(email.getBytes()));
+        password = new String(Base64.decode(password.getBytes()));
     }
 }

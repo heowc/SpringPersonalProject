@@ -15,8 +15,7 @@ import java.util.stream.IntStream;
 @Transactional
 public class InitRunner implements CommandLineRunner {
 
-    @Autowired
-    MemberService memberService;
+    @Autowired MemberService memberService;
     @Autowired NoticeRepository noticeRepository;
 
     @Override
