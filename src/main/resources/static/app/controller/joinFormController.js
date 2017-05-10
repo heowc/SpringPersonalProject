@@ -1,42 +1,40 @@
 'use strict';
 
-app.controller('joinFormController', (memberService, modalService, $scope) => {
+app.controller('joinFormController', (memberService, modalService, $scope, base64) => {
 
     console.log('joinFormController');
 
-    $scope.member = {
+    $scope.input = {
         email    : 'naeun@gmail.com',
         password : '1234',
         nickName : 'naeun'
     };
 
     $scope.join = () => {
-        encryptMember();
-        memberService.join($scope.member)
+        memberService.join(encryptMember($scope.input))
             .then(
                 (response) => {
                     modalService.closeJoinModal();
                 },
                 (error) => {
-                    decryptMember();
-                    if (error.status === 500) {
-                        alert(error.data.message);
-                    }
+                    decryptMember().then(()=> {
+                        if (error.status === 500) {
+                            alert(error.data.message);
+                        }
 
-                    if (error.status === 400) {
-                        alert(error.data.defaultMessage);
-                    }
+                        if (error.status === 400) {
+                            alert(error.data.defaultMessage);
+                        }
+                    });
                 }
             );
     };
 
-    const encryptMember = () => {
-        $scope.member.email = toEncrypt($scope.member.email);
-        $scope.member.password = toEncrypt($scope.member.password);
-    };
-
-    const decryptMember = () => {
-        $scope.member.email = toDecrypt($scope.member.email);
-        $scope.member.password = toDecrypt($scope.member.password);
+    const encryptMember = (member) => {
+        let _member = {};
+        _member['email'] = base64.encode(member.email);
+        _member['password'] = base64.encode(member.password);
+        _member['nickName'] = member.nickName;
+        return _member;
     };
 });

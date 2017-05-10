@@ -1,19 +1,17 @@
 'use strict';
 
-app.controller('loginFormController', (memberService, modalService, $scope, $cookies) => {
+app.controller('loginFormController', (memberService, modalService, $scope, $cookies, base64) => {
 
     console.log('loginFormController');
 
-    $scope.member = {
+    $scope.input = {
         email    : 'heowc1992@gmail.com',
         password : '123412341234'
     };
 
     $scope.login = () => {
-        console.log($scope.member);
-        encryptMember();
-        console.log($scope.member);
-        memberService.login($scope.member)
+
+        memberService.login(encryptMember($scope.input))
             .then(
                 (response) => {
                     if( response.data !== '' ) {
@@ -34,13 +32,10 @@ app.controller('loginFormController', (memberService, modalService, $scope, $coo
         modalService.openJoinModal();
     };
 
-    const encryptMember = () => {
-        $scope.member.email = toEncrypt($scope.member.email);
-        $scope.member.password = toEncrypt($scope.member.password);
-    };
-
-    const decryptMember = () => {
-        $scope.member.email = toDecrypt($scope.member.email);
-        $scope.member.password = toDecrypt($scope.member.password);
+    const encryptMember = (member) => {
+        let _member = {};
+        _member['email'] = base64.encode(member.email);
+        _member['password'] = base64.encode(member.password);
+        return _member;
     };
 });
