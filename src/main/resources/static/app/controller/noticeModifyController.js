@@ -23,13 +23,12 @@ app.controller('noticeModifyController', (noticeService, $scope, $location, $rou
         );
 
     $scope.modify = () => {
-
         if( !isAuthentication($cookies, $scope.notice.member.email) ) {
             alert('warning!!');
             return;
         }
-
         if($scope.notice.content.length > 0) {
+
             noticeService.update($scope.notice)
                 .then(
                     (response) => {

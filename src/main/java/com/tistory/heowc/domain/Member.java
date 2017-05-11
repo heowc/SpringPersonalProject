@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Base64;
 
 import javax.persistence.Entity;
@@ -43,13 +44,19 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    public void toEncrypt() throws UnsupportedEncodingException {
-        email = new String(Base64.encode(email.getBytes()));
-        password = new String(Base64.encode(password.getBytes()));
+    public Member(UserDetails userDetails) {
+        this.email = userDetails.getUsername();
     }
 
-    public void toDecrypt() throws UnsupportedEncodingException {
+    public Member toEncrypt() throws UnsupportedEncodingException {
+        email = new String(Base64.encode(email.getBytes()));
+        password = new String(Base64.encode(password.getBytes()));
+        return this;
+    }
+
+    public Member toDecrypt() throws UnsupportedEncodingException {
         email = new String(Base64.decode(email.getBytes()));
         password = new String(Base64.decode(password.getBytes()));
+        return this;
     }
 }

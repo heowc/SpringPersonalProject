@@ -18,8 +18,8 @@ public class NoticeController {
 
     @GetMapping("search")
     public Page<NoticeDto> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                  @RequestParam(required = false, defaultValue = "")  String  type,
-                                                  @RequestParam(required = false, defaultValue = "")  String  keyword) {
+                                          @RequestParam(required = false, defaultValue = "")  String  type,
+                                          @RequestParam(required = false, defaultValue = "")  String  keyword) {
         return service.findNoticePaging(page, type, keyword);
     }
 

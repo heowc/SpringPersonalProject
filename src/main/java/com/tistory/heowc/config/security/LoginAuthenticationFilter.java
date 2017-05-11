@@ -33,7 +33,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         Member member = getMember(request);
         if (member != null) {
             return getAuthenticationManager()
-                    .authenticate(new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPassword()));
+                    .authenticate(new UsernamePasswordAuthenticationToken(member, member.getPassword()));
         } else {
             throw new InternalAuthenticationServiceException("Not Serializable Exception");
         }
@@ -42,10 +42,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     private Member getMember(HttpServletRequest request) {
         try {
             Member member = objectMapper.readValue(request.getReader(), Member.class);
-            System.out.println(member);
-            member.toDecrypt();
-            System.out.println(member);
-            return member;
+            return member.toDecrypt();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -60,6 +57,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authResult);
         SecurityContextHolder.setContext(context);
+        System.out.println(authResult);
         handler.onAuthenticationSuccess(request, response, authResult);
     }
 

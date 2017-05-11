@@ -22,9 +22,7 @@ public class InitRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Member member = new Member("heowc1992@gmail.com", "123412341234");
 
-        member.toEncrypt();
-
-        memberService.validAndSave(member);
+        memberService.validAndSave(member.toEncrypt());
 
         IntStream.range(0, 15)
                 .forEach(value -> noticeRepository.save(getNotice(member)));

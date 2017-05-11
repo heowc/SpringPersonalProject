@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,15 +59,14 @@ public class NoticeServiceImpl implements NoticeService {
     public void insert(Notice notice) {
         notice.setCreateDateTime(LocalDateTime.now());
         notice.setModifyDateTime(LocalDateTime.now());
-        notice.setMember(new Member((String) SecurityContextHolder.getContext()
-                                                                    .getAuthentication().getPrincipal()));
+        notice.setMember(new Member((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         noticeRepository.save(notice);
     }
 
     @Override
     public void delete(Long idx) throws AccessDeniedException {
-        if ( !matchByIdxAndPrincipal(idx, SecurityContextHolder.getContext()
-                                                                .getAuthentication().getPrincipal()) ) {
+        if ( !matchByIdxAndPrincipal(idx, ((UserDetails)SecurityContextHolder.getContext()
+                                                                .getAuthentication().getPrincipal()).getUsername()) ) {
             throw new AccessDeniedException("접근이 거부 되었습니다.");
         }
         noticeRepository.delete(idx);

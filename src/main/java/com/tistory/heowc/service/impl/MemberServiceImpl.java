@@ -20,9 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException {
-        System.out.println(member);
         member.toDecrypt();
-        System.out.println(member);
 
         if( memberRepository.exists(member.getEmail()) ) {
             throw new DuplicateMemberException(member.getEmail() + "는 이미 사용 중인 Email 입니다.");

@@ -12,6 +12,8 @@ app.controller('noticeWriteController', (noticeService, $scope, $location, $cook
         }
     };
 
+    $scope.notice = {};
+
     $scope.save = () => {
 
         if( !isAuthentication($cookies) ) {
@@ -19,13 +21,8 @@ app.controller('noticeWriteController', (noticeService, $scope, $location, $cook
             return;
         }
 
-        let notice = {
-            title   : $scope.title,
-            content : $scope.content
-        };
-
         if($scope.notice.content.length > 0) {
-            noticeService.create(notice)
+            noticeService.create($scope.notice)
                 .then(
                     (response) => {
                         alert('success!!');

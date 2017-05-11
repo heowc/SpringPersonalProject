@@ -5,6 +5,7 @@ import com.tistory.heowc.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class LoginAuthenticationHandler implements AuthenticationSuccessHandler,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() +"; HttpOnly");
-        response.getWriter().write(objectMapper.writeValueAsString(new Member((String) authentication.getPrincipal())));
+        response.getWriter().write(objectMapper.writeValueAsString(new Member((UserDetails) authentication.getPrincipal())));
     }
 
     @Override

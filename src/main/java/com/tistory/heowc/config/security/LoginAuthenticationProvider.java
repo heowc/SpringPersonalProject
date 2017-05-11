@@ -1,5 +1,6 @@
 package com.tistory.heowc.config.security;
 
+import com.tistory.heowc.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,16 +19,16 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String email= (String) authentication.getPrincipal();
+        Member member = (Member) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
 
         if( !isMatches(password, userDetails.getPassword()) ) {
             throw new BadCredentialsException("Bad Credentials Exception");
         }
 
-        return new UsernamePasswordAuthenticationToken(email, password, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
     @Override
