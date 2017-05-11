@@ -50,9 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
     		.logout()
                 .logoutUrl(LOGOUT_END_POINT)
-                .deleteCookies("JSESSIONID")
+                .deleteCookies("JSESSIONID", "id")
                 .logoutSuccessHandler(logoutHandler)
-                .invalidateHttpSession(true)
                 .and()
     		.csrf().disable();
     }

@@ -57,7 +57,6 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authResult);
         SecurityContextHolder.setContext(context);
-        System.out.println(authResult);
         handler.onAuthenticationSuccess(request, response, authResult);
     }
 
