@@ -4,8 +4,9 @@ Personal project using Spring Boot
 
 # Build
 
-* VM options <p>
-<code>-Xbootclasspath/p:./alpn-boot-8.1.11.v20170118.jar</code>
+* **VM options**
+
+    > -Xbootclasspath/p:./alpn-boot-8.1.11.v20170118.jar
 
 # Back-End
 
@@ -34,3 +35,11 @@ Personal project using Spring Boot
 ## ERD
 
 ![alt tag](./erd.png)
+
+
+#####Coming soon !!!
+
+* ~~spring security~~
+* ~~http2.0/ssl~~
+* send initialized password to this email
+* add comment of notice

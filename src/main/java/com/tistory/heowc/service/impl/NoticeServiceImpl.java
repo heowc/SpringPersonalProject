@@ -27,7 +27,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Autowired ModelMapper modelMapper;
 
     @Override
-    public Page<NoticeDto> findNoticePaging(Integer page, String type, String keyword) {
+    public Page<NoticeDto> findNoticeDtoList(Integer page, String type, String keyword) {
         return findNoticeByConditions(page, type, keyword)
                 .map(notice -> modelMapper.map(notice, NoticeDto.class));
     }
@@ -64,9 +64,8 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void delete(Long idx) throws AccessDeniedException {
-        if ( !matchByIdxAndPrincipal(idx, ((UserDetails)SecurityContextHolder.getContext()
-                                                                .getAuthentication().getPrincipal()).getUsername()) ) {
+    public void delete(Long idx, UserDetails userDetails) throws AccessDeniedException {
+        if ( !matchByIdxAndPrincipal(idx, userDetails.getUsername()) ) {
             throw new AccessDeniedException("접근이 거부 되었습니다.");
         }
         noticeRepository.delete(idx);

@@ -21,7 +21,7 @@ public class NoticeServiceTest {
 
     @Test
     public void test_findNoticePaging() throws Exception {
-        Page<NoticeDto> notice = noticeService.findNoticePaging(1, "title", "");
+        Page<NoticeDto> notice = noticeService.findNoticeDtoList(1, "title", "");
         assertThat(notice.getSize()).isEqualTo(10);
     }
 

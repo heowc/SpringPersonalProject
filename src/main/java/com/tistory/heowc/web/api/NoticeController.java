@@ -6,6 +6,8 @@ import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
@@ -20,7 +22,7 @@ public class NoticeController {
     public Page<NoticeDto> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
                                           @RequestParam(required = false, defaultValue = "")  String  type,
                                           @RequestParam(required = false, defaultValue = "")  String  keyword) {
-        return service.findNoticePaging(page, type, keyword);
+        return service.findNoticeDtoList(page, type, keyword);
     }
 
     @GetMapping("{idx}")
@@ -34,8 +36,9 @@ public class NoticeController {
     }
 
     @DeleteMapping("{idx}")
-    public void delete(@PathVariable Long idx) throws AccessDeniedException {
-        service.delete(idx);
+    public void delete(@PathVariable Long idx,
+                       Authentication authentication) throws AccessDeniedException {
+        service.delete(idx, (UserDetails) authentication.getPrincipal());
     }
 
     @PreAuthorize("(#notice.member.email == principal.username)")
