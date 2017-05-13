@@ -34,7 +34,7 @@ Personal project using Spring Boot
 
 ## ERD
 
-![alt tag](./erd.png)
+![alt text](./erd.png)
 
 
 #####Coming soon !!!

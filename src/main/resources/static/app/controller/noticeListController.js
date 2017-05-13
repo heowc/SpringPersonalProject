@@ -78,7 +78,6 @@ app.controller('noticeListController', (noticeService, modalService, memberServi
     };
 
     $scope.logout = () => {
-        $cookies.remove('id');
         memberService.logout();
         $route.reload();
     }
