@@ -1,10 +1,9 @@
 package com.tistory.heowc.web.api;
 
 import com.tistory.heowc.domain.Notice;
-import com.tistory.heowc.domain.mapper.NoticeDto;
 import com.tistory.heowc.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,15 +18,15 @@ public class NoticeController {
     @Autowired NoticeService service;
 
     @GetMapping("search")
-    public Page<NoticeDto> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                          @RequestParam(required = false, defaultValue = "")  String  type,
-                                          @RequestParam(required = false, defaultValue = "")  String  keyword) {
-        return service.findNoticeDtoList(page, type, keyword);
+    public ResponseEntity<?> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                            @RequestParam(required = false, defaultValue = "")  String  type,
+                                            @RequestParam(required = false, defaultValue = "")  String  keyword) {
+        return ResponseEntity.ok(service.findNoticeDtoList(page, type, keyword));
     }
 
     @GetMapping("{idx}")
-    public Notice findNoticeById(@PathVariable Long idx) {
-        return service.findNoticeById(idx);
+    public ResponseEntity<?> findNoticeById(@PathVariable Long idx) {
+        return ResponseEntity.ok(service.findNoticeById(idx));
     }
 
     @PostMapping

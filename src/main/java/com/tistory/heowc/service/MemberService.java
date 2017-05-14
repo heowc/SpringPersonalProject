@@ -7,5 +7,7 @@ import java.io.UnsupportedEncodingException;
 
 public interface MemberService {
 
-    public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException;
+    Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException;
+
+    void resetPasswordAndSendMail(String toEmail);
 }

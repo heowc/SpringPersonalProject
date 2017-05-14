@@ -5,11 +5,10 @@ import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
@@ -29,5 +28,14 @@ public class MemberController {
         }
 
         return ResponseEntity.ok(memberService.validAndSave(member));
+    }
+
+    @GetMapping("reset/password")
+    public void resetPassword(Authentication authentication) {
+        memberService.resetPasswordAndSendMail(getUserDetails(authentication).getUsername());
+    }
+
+    private UserDetails getUserDetails(Authentication authentication) {
+        return (UserDetails) authentication.getPrincipal();
     }
 }
