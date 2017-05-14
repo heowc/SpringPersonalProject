@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SecurityTest {
 
     @Test
-    @WithMockUser(username="heowc1992@gmail.com", password = "1234")
+    @WithMockUser(username="heowc1992@gmail.com", password = "123412341234")
     public void test_withMockUser() throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((User) authentication.getPrincipal()).getUsername();

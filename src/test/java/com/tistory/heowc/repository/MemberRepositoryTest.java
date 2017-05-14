@@ -20,12 +20,12 @@ public class MemberRepositoryTest {
 
     @Before
     public void before_init() throws Exception {
-        memberRepository.save(new Member("heowc1992@gmail.com", "1234"));
+        memberRepository.save(new Member("heowc1992@gmail.com", "123412341234"));
     }
 
     @Test
     public void test_insert() throws Exception {
-        Member member = memberRepository.save(new Member("heowc@gmail.com", "1234"));
+        Member member = memberRepository.save(new Member("heowc@gmail.com", "123412341234"));
         assertThat(member).isEqualTo(member);
     }
 

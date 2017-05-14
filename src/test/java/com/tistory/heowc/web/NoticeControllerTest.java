@@ -25,7 +25,7 @@ public class NoticeControllerTest {
     @MockBean NoticeService noticeService;
 
     @Test
-    @WithMockUser(username="heowc1992@gmail.com", password = "1234")
+    @WithMockUser(username="heowc1992@gmail.com", password = "123412341234")
     public void test_findNoticePage() throws Exception {
         int statusCode = mvc.perform(get("/api/notice/search").accept(MediaType.APPLICATION_JSON_UTF8))
                                .andReturn().getResponse().getStatus();
@@ -42,7 +42,7 @@ public class NoticeControllerTest {
     }
 
     @Test
-    @WithMockUser(username="heowc1992@gmail.com", password = "1234")
+    @WithMockUser(username="heowc1992@gmail.com", password = "123412341234")
     public void test_deleteByIdx() throws Exception {
         int statusCode = mvc.perform(delete("/api/notice/1"))
                 .andReturn().getResponse().getStatus();
