@@ -23,6 +23,9 @@ repositories {
 }
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-integration')
+	compile('org.springframework.integration:spring-integration-java-dsl:1.2.1.RELEASE')
+
 	compile ('org.springframework.boot:spring-boot-starter-web') {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	}
