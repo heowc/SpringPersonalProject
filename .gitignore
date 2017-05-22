@@ -26,3 +26,4 @@ nbdist/
 classes/
 src/main/resources/heowc.jks
 /src/main/resources/application-mail.properties
+/src/main/resources/application-ssl.properties

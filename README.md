@@ -37,9 +37,9 @@ Personal project using Spring Boot
 ![alt text](./erd.png)
 
 
-#####Coming soon !!!
+##### Coming soon !!!
 
 * ~~spring security~~
 * ~~http2.0/ssl~~
-* send initialized password to this email
+* ~~send initialized password to this email~~
 * add comment of notice
