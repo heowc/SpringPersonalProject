@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,10 +55,10 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void insert(Notice notice) {
+    public void insert(Notice notice, UserDetails userDetails) {
         notice.setCreateDateTime(LocalDateTime.now());
         notice.setModifyDateTime(LocalDateTime.now());
-        notice.setMember(new Member((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        notice.setMember(new Member(userDetails));
         noticeRepository.save(notice);
     }
 

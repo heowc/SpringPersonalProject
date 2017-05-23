@@ -30,8 +30,9 @@ public class NoticeController {
     }
 
     @PostMapping
-    public void insert(@RequestBody Notice notice) {
-        service.insert(notice);
+    public void insert(@RequestBody Notice notice,
+                       Authentication authentication) {
+        service.insert(notice, (UserDetails) authentication.getPrincipal());
     }
 
     @DeleteMapping("{idx}")
@@ -45,6 +46,4 @@ public class NoticeController {
     public void update(@RequestBody Notice notice) {
         service.update(notice);
     }
-
-
 }

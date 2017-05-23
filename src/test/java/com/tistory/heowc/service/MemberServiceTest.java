@@ -21,7 +21,8 @@ public class MemberServiceTest {
 
     @Test
     public void test_validAndSave() throws Exception {
-        Member member = memberService.validAndSave(new Member("heowc@gmail.com", "123412341234"));
+        Member member = memberService.validAndSave(new Member("heowc@gmail.com", "123412341234")
+                                                    .toEncrypt());
         assertThat(member)
                 .isEqualTo(memberRepository.findOne("heowc@gmail.com"));
     }

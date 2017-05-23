@@ -12,7 +12,7 @@ public interface NoticeService {
     Page<NoticeDto> findNoticeDtoList(Integer page, String type, String keyword);
     Notice findNoticeById(Long idx);
 
-    void insert(Notice content);
+    void insert(Notice content, UserDetails userDetails);
     void delete(Long idx, UserDetails userDetails) throws AccessDeniedException;
     void update(Notice notice);
 }
