@@ -2,7 +2,7 @@ package com.tistory.heowc.web.api;
 
 import com.tistory.heowc.domain.Comment;
 import com.tistory.heowc.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -13,36 +13,32 @@ import java.nio.file.AccessDeniedException;
 
 @RestController
 @RequestMapping("api/comment")
+@RequiredArgsConstructor
 public class CommentController {
 
-    @Autowired CommentService service;
-
-    @GetMapping("search")
-    public ResponseEntity<?> findCommentPage(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                            @RequestParam(required = false, defaultValue = "")   Long  noticeIdx) {
-        return ResponseEntity.ok(service.findCommentList(page, noticeIdx));
-    }
+    private final CommentService commentService;
 
     @GetMapping("{idx}")
-    public ResponseEntity<?> findCommentById(@PathVariable Long idx) {
-        return ResponseEntity.ok(service.findCommentById(idx));
+    public ResponseEntity<?> findCommentPage(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                            @RequestParam(required = false, defaultValue = "")   Long  noticeIdx) {
+        return ResponseEntity.ok(commentService.findCommentList(page, noticeIdx));
     }
 
     @PostMapping
     public void insert(@RequestBody Comment comment,
                        Authentication authentication) {
-        service.insert(comment, (UserDetails) authentication.getPrincipal());
+        commentService.insert(comment, (UserDetails) authentication.getPrincipal());
     }
 
     @DeleteMapping("{idx}")
     public void delete(@PathVariable Long idx,
                        Authentication authentication) throws AccessDeniedException {
-        service.delete(idx, (UserDetails) authentication.getPrincipal());
+        commentService.delete(idx, (UserDetails) authentication.getPrincipal());
     }
 
     @PreAuthorize("(#comment.member.email == principal.username)")
     @PutMapping
     public void update(@RequestBody Comment comment) {
-        service.update(comment);
+        commentService.update(comment);
     }
 }

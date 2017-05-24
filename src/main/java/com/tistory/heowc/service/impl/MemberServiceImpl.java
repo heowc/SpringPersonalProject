@@ -5,7 +5,7 @@ import com.tistory.heowc.repository.MemberRepository;
 import com.tistory.heowc.service.MailService;
 import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +16,11 @@ import java.util.UUID;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired MemberRepository memberRepository;
-    @Autowired PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Resource(name = "GmailMailService") MailService mailService;
 

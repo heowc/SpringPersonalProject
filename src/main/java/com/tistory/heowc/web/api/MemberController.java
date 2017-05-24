@@ -3,7 +3,7 @@ package com.tistory.heowc.web.api;
 import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +15,10 @@ import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("api/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired MemberService memberService;
+    private final MemberService memberService;
 
     @PostMapping
     public ResponseEntity<?> saveMember(@Valid @RequestBody Member member,

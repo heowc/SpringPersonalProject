@@ -1,8 +1,9 @@
 package com.tistory.heowc.web.api;
 
 import com.tistory.heowc.domain.Notice;
+import com.tistory.heowc.service.CommentService;
 import com.tistory.heowc.service.NoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -13,37 +14,45 @@ import java.nio.file.AccessDeniedException;
 
 @RestController
 @RequestMapping("api/notice")
+@RequiredArgsConstructor
 public class NoticeController {
 
-    @Autowired NoticeService service;
+    private final NoticeService noticeService;
+    private final CommentService commentService;
 
     @GetMapping("search")
     public ResponseEntity<?> findNoticePage(@RequestParam(required = false, defaultValue = "0") Integer page,
                                             @RequestParam(required = false, defaultValue = "")  String  type,
                                             @RequestParam(required = false, defaultValue = "")  String  keyword) {
-        return ResponseEntity.ok(service.findNoticeDtoList(page, type, keyword));
+        return ResponseEntity.ok(noticeService.findNoticeDtoList(page, type, keyword));
     }
 
     @GetMapping("{idx}")
     public ResponseEntity<?> findNoticeById(@PathVariable Long idx) {
-        return ResponseEntity.ok(service.findNoticeById(idx));
+        return ResponseEntity.ok(noticeService.findNoticeById(idx));
     }
 
     @PostMapping
     public void insert(@RequestBody Notice notice,
                        Authentication authentication) {
-        service.insert(notice, (UserDetails) authentication.getPrincipal());
+        noticeService.insert(notice, (UserDetails) authentication.getPrincipal());
     }
 
     @DeleteMapping("{idx}")
     public void delete(@PathVariable Long idx,
                        Authentication authentication) throws AccessDeniedException {
-        service.delete(idx, (UserDetails) authentication.getPrincipal());
+        noticeService.delete(idx, (UserDetails) authentication.getPrincipal());
     }
 
     @PreAuthorize("(#notice.member.email == principal.username)")
     @PutMapping
     public void update(@RequestBody Notice notice) {
-        service.update(notice);
+        noticeService.update(notice);
+    }
+
+    @GetMapping("{idx}/comment")
+    public ResponseEntity<?> findCommentPage(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                             @RequestParam(required = false, defaultValue = "")   Long  noticeIdx) {
+        return ResponseEntity.ok(commentService.findCommentList(page, noticeIdx));
     }
 }

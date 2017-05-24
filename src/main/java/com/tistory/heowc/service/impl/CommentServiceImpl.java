@@ -4,7 +4,7 @@ import com.tistory.heowc.domain.Comment;
 import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.repository.CommentRepository;
 import com.tistory.heowc.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.AccessDeniedException;
@@ -16,9 +16,10 @@ import java.time.LocalDateTime;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
-    @Autowired CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public Page<Comment> findCommentList(Integer page, Long noticeIdx) {

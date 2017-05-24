@@ -1,7 +1,7 @@
 package com.tistory.heowc.service.impl;
 
 import com.tistory.heowc.service.MailService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 
 @Service("GmailMailService")
 @Async
+@RequiredArgsConstructor
 public class GmailMailService implements MailService {
 
-    @Autowired JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     @Override
     public void sendMail(String toEmail, String message) {

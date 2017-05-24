@@ -1,7 +1,7 @@
 package com.tistory.heowc.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,11 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired ObjectMapper objectMapper;
-    @Autowired LoginAuthenticationHandler loginAuthenticationHandler;
-    @Autowired LogoutHandler logoutHandler;
+    private final ObjectMapper objectMapper;
+    private final LoginAuthenticationHandler loginAuthenticationHandler;
+    private final LogoutHandler logoutHandler;
 
     private static final String BASE_END_POINT = "/notice";
     private static final String LOGIN_END_POINT = "/login";

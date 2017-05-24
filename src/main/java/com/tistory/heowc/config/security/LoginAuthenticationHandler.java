@@ -2,7 +2,7 @@ package com.tistory.heowc.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tistory.heowc.domain.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@RequiredArgsConstructor
 public class LoginAuthenticationHandler implements AuthenticationSuccessHandler,
                                                     AuthenticationFailureHandler {
 
-    @Autowired ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

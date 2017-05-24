@@ -5,8 +5,8 @@ import com.tistory.heowc.domain.Notice;
 import com.tistory.heowc.domain.mapper.NoticeDto;
 import com.tistory.heowc.repository.NoticeRepository;
 import com.tistory.heowc.service.NoticeService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,11 +19,12 @@ import java.time.LocalDateTime;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
 
-    @Autowired NoticeRepository noticeRepository;
+    private final NoticeRepository noticeRepository;
 
-    @Autowired ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public Page<NoticeDto> findNoticeDtoList(Integer page, String type, String keyword) {
