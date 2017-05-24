@@ -5,24 +5,31 @@ import com.tistory.heowc.repository.MemberRepository;
 import com.tistory.heowc.service.MailService;
 import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
-    @Resource(name = "GmailMailService") MailService mailService;
+    @Autowired
+    public MemberServiceImpl(MemberRepository memberRepository,
+                             PasswordEncoder passwordEncoder,
+                             @Qualifier(value = "GmailMailService") MailService mailService) {
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.mailService = mailService;
+    }
 
     @Override
     public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException {
