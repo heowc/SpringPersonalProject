@@ -42,7 +42,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     private Member getMember(HttpServletRequest request) {
         try {
             Member member = objectMapper.readValue(request.getReader(), Member.class);
-            return member.toDecrypt();
+            return member.applyDecode();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

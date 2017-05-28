@@ -22,14 +22,14 @@ public class MemberServiceTest {
     @Test
     public void test_validAndSave() throws Exception {
         Member member = memberService.validAndSave(new Member("heowc@gmail.com", "123412341234")
-                                                    .toEncrypt());
+                                                    .applyEncode());
         assertThat(member)
                 .isEqualTo(memberRepository.findOne("heowc@gmail.com"));
     }
 
     @Test
-    public void test_resetPasswordAndSendMail() throws Exception {
-        memberService.resetPasswordAndSendMail("heowc1992@gmail.com");
+    public void test_searchPassword() throws Exception {
+        memberService.searchPassword(new Member("heowc1992@gmail.com"));
         assertThat("123412341234")
                 .isNotEqualTo(memberRepository.findOne("heowc1992@gmail.com").getPassword());
     }

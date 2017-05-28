@@ -31,9 +31,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.validAndSave(member));
     }
 
-    @GetMapping("reset/password")
-    public void resetPassword(Authentication authentication) {
-        memberService.resetPasswordAndSendMail(getUserDetails(authentication).getUsername());
+    @PostMapping("search/password")
+    public void searchPassword(@RequestBody Member member) {
+        System.out.println(member);
+        memberService.searchPassword(member);
     }
 
     private UserDetails getUserDetails(Authentication authentication) {

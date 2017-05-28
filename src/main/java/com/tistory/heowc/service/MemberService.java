@@ -9,5 +9,5 @@ public interface MemberService {
 
     Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException;
 
-    void resetPasswordAndSendMail(String toEmail);
+    void searchPassword(Member member);
 }

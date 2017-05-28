@@ -1,5 +1,6 @@
 package com.tistory.heowc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -48,13 +49,13 @@ public class Member implements Serializable {
         this.email = userDetails.getUsername();
     }
 
-    public Member toEncrypt() throws UnsupportedEncodingException {
+    public Member applyEncode() throws UnsupportedEncodingException {
         email = new String(Base64.encode(email.getBytes()));
         password = new String(Base64.encode(password.getBytes()));
         return this;
     }
 
-    public Member toDecrypt() throws UnsupportedEncodingException {
+    public Member applyDecode() throws UnsupportedEncodingException {
         email = new String(Base64.decode(email.getBytes()));
         password = new String(Base64.decode(password.getBytes()));
         return this;
