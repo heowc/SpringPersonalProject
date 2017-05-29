@@ -12,6 +12,10 @@ app.factory('memberService', ($http) => {
 
         join : (member) => {
             return $http.post(`api/member`, member);
+        },
+
+        searchPassword : (member) => {
+            return $http.post(`api/member/search/password`, member);
         }
     };
 });

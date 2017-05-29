@@ -32,6 +32,22 @@ app.factory('modalService', ($http, $uibModal, $route, $timeout) => {
             $timeout(() => {
                 $route.reload();
             }, 500);
-        }
+        },
+
+        openSearchPasswordModal : () => {
+            modal = $uibModal.open({
+                animation: true,
+                component : 'searchPasswordFormModalComponent'
+            });
+        },
+
+        closeSearchPasswordModal : () => {
+            modal.dismiss();
+
+            $timeout(() => {
+                $route.reload();
+            }, 500);
+        },
+
     };
 });

@@ -37,4 +37,8 @@ app.controller('joinFormController', (memberService, modalService, $scope, base6
         _member['nickName'] = member.nickName;
         return _member;
     };
+
+    $scope.closeModal = () => {
+        modalService.closeJoinModal();
+    }
 });

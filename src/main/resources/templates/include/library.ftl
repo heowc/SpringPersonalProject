@@ -26,5 +26,7 @@
 <script type="application/javascript" src="/app/controller/noticeModifyController.js"></script>
 <script type="application/javascript" src="/app/controller/loginFormController.js"></script>
 <script type="application/javascript" src="/app/controller/joinFormController.js"></script>
+<script type="application/javascript" src="/app/controller/searchPasswordFormController.js"></script>
 <script type="application/javascript" src="/app/component/loginFormModalComponent.js"></script>
 <script type="application/javascript" src="/app/component/joinFormModalComponent.js"></script>
+<script type="application/javascript" src="/app/component/searchPasswordFormModalComponent.js"></script>

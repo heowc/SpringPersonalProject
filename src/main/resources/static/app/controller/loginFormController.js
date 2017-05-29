@@ -32,6 +32,12 @@ app.controller('loginFormController', (memberService, modalService, $scope, $coo
         modalService.openJoinModal();
     };
 
+    $scope.openSearchPasswordModal = () => {
+        modalService.closeLoginModal();
+        modalService.openSearchPasswordModal();
+    };
+
+
     const encryptMember = (member) => {
         let _member = {};
         _member['email'] = base64.encode(member.email);
