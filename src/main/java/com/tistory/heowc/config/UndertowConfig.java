@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class UndertowConfig {
 
     @Bean
-    public UndertowEmbeddedServletContainerFactory createUndertowCustomizerWithHttp2() {
+    public UndertowEmbeddedServletContainerFactory undertowEmbeddedServletContainerFactory() {
         UndertowEmbeddedServletContainerFactory factory =
                 new UndertowEmbeddedServletContainerFactory();
         factory.addBuilderCustomizers(
