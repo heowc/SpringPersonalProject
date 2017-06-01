@@ -34,6 +34,7 @@ dependencies {
 	compile('org.mortbay.jetty.alpn:alpn-boot:8.1.11.v20170118')
 
 	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.springframework.boot:spring-boot-actuator")
 
 	compile('org.hibernate:hibernate-java8:5.0.12.Final')
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr2')
