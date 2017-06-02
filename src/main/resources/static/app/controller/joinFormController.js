@@ -17,15 +17,13 @@ app.controller('joinFormController', (memberService, modalService, $scope, base6
                     modalService.closeJoinModal();
                 },
                 (error) => {
-                    decryptMember().then(()=> {
-                        if (error.status === 500) {
-                            alert(error.data.message);
-                        }
+                    if (error.status === 500) {
+                        alert(error.data.message);
+                    }
 
-                        if (error.status === 400) {
-                            alert(error.data.defaultMessage);
-                        }
-                    });
+                    if (error.status === 400) {
+                        alert(error.data.defaultMessage);
+                    }
                 }
             );
     };
