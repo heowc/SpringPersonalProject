@@ -42,10 +42,15 @@ dependencies {
 	compile('org.modelmapper:modelmapper:0.7.8')
 
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
+
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compileOnly('org.projectlombok:lombok')
 
 	runtime('com.h2database:h2')
+
+	compile('com.github.kstyrc:embedded-redis:0.6')
 
 	compile('org.springframework.boot:spring-boot-starter-mail')
 
