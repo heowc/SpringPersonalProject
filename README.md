@@ -31,6 +31,7 @@ Personal project using Spring Boot
 # Database
 
 * H2 1.4.193
+* Redis 2.8.19
 
 ## ERD
 
