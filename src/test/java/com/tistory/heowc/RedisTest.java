@@ -14,8 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RedisTest {
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    @Autowired StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void test1_set() throws Exception {
@@ -25,5 +24,15 @@ public class RedisTest {
     @Test
     public void test2_get() throws Exception {
         System.out.println(stringRedisTemplate.opsForValue().get("key"));
+    }
+
+    @Test
+    public void test3_push() throws Exception {
+        stringRedisTemplate.opsForList().leftPush("key2", "value2");
+    }
+
+    @Test
+    public void test4_pop() throws Exception {
+        System.out.println(stringRedisTemplate.opsForList().leftPop("key2"));
     }
 }
