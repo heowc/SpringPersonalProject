@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
-@Service
+@Service("memberServiceImpl")
 @Transactional
 public class MemberServiceImpl implements MemberService {
 
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        return memberRepository.saveAndFlush(member);
+        return memberRepository.save(member);
     }
 
     @Override
