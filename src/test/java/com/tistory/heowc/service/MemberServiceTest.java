@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -18,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class MemberServiceTest {
 
-    @Resource(name = "proxyMemberService") MemberService memberService;
+    @Autowired MemberService proxyMemberService;
     @Autowired MemberRepository memberRepository;
 
     @Test
     public void test_validAndSave() throws Exception {
-        Member member = memberService.validAndSave(new Member("heowc@gmail.com", "123412341234")
+        Member member = proxyMemberService.validAndSave(new Member("heowc@gmail.com", "123412341234")
                                                     .applyEncode());
         assertThat(member)
                 .isEqualTo(memberRepository.findOne("heowc@gmail.com"));
@@ -31,7 +29,7 @@ public class MemberServiceTest {
 
     @Test
     public void test_searchPassword() throws Exception {
-        memberService.searchPassword(new Member("heowc1992@gmail.com"));
+        proxyMemberService.searchPassword(new Member("heowc1992@gmail.com"));
         assertThat("123412341234")
                 .isNotEqualTo(memberRepository.findOne("heowc1992@gmail.com").getPassword());
     }

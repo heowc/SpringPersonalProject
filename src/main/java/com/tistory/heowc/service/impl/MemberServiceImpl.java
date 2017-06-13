@@ -5,8 +5,7 @@ import com.tistory.heowc.repository.MemberRepository;
 import com.tistory.heowc.service.MailService;
 import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,22 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
-@Service("memberServiceImpl")
+@Service
 @Transactional
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final MailService mailService;
-
-    @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository,
-                             PasswordEncoder passwordEncoder,
-                             @Qualifier(value = "GmailMailService") MailService mailService) {
-        this.memberRepository = memberRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.mailService = mailService;
-    }
+    private final MailService gmailMailService;
 
     @Override
     public Member validAndSave(Member member) throws DuplicateMemberException, UnsupportedEncodingException {
@@ -51,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
         if(searchMember != null) {
             String newPassword = getNewPassword();
             searchMember.setPassword(passwordEncoder.encode(newPassword));
-            mailService.sendMail(searchMember.getEmail(), newPassword);
+            gmailMailService.sendMail(searchMember.getEmail(), "비밀번호 초기화 메일", newPassword);
         } else {
             throw new UsernameNotFoundException(member.getEmail() + "is not found");
         }

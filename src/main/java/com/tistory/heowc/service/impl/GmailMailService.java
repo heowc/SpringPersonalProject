@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-@Service("GmailMailService")
+@Service
 @Async
 @RequiredArgsConstructor
 public class GmailMailService implements MailService {
@@ -15,10 +15,11 @@ public class GmailMailService implements MailService {
     private final JavaMailSender javaMailSender;
 
     @Override
-    public void sendMail(String toEmail, String message) {
+    public void sendMail(String toEmail, String subject, String message) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(toEmail);
         mailMessage.setFrom("heowc1992@gmail.com");
+        mailMessage.setSubject(subject);
         mailMessage.setText(message);
         javaMailSender.send(mailMessage);
     }

@@ -4,18 +4,17 @@ import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.service.MemberService;
 import javassist.bytecode.DuplicateMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
-@Service("proxyMemberService")
+@Service
 public class ProxyMemberService implements MemberService {
 
-    @Resource(name = "memberServiceImpl")
-    private MemberService memberService;
+    @Autowired
+    private MemberService memberServiceImpl;
 
     @Resource(name = "memberRedisTemplate")
     private ValueOperations<String, Member> memberOps;
@@ -31,11 +30,11 @@ public class ProxyMemberService implements MemberService {
         memberOps.set(member.getEmail(), member);
         member.applyEncode();
 
-        return memberService.validAndSave(member);
+        return memberServiceImpl.validAndSave(member);
     }
 
     @Override
     public void searchPassword(Member member) {
-        memberService.searchPassword(member);
+        memberServiceImpl.searchPassword(member);
     }
 }
