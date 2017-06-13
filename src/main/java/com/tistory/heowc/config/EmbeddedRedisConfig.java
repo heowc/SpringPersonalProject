@@ -6,15 +6,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import redis.clients.jedis.Protocol;
+import redis.embedded.RedisServer;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Configuration
 public class EmbeddedRedisConfig {
 
-//    @Bean
-//    public RedisServer redisServer() {
-//        RedisServer.builder().reset();
-//        return RedisServer.builder().port(Protocol.DEFAULT_PORT).build();
-//    }
+    @Bean
+    public RedisServer redisServer() {
+        RedisServer.builder().reset();
+        return RedisServer.builder().port(Protocol.DEFAULT_PORT).build();
+    }
 
     @Bean("memberRedisTemplate")
     public RedisTemplate<String, Member> memberRedisTemplate(JedisConnectionFactory jedisConnectionFactory) {
@@ -25,13 +30,13 @@ public class EmbeddedRedisConfig {
         return redisTemplate;
     }
 
-//    @PostConstruct
-//    public void start() {
-//        if (!redisServer().isActive()) redisServer().start();
-//    }
-//
-//    @PreDestroy
-//    public void stop() {
-//        redisServer().stop();
-//    }
+    @PostConstruct
+    public void start() {
+        if (!redisServer().isActive()) redisServer().start();
+    }
+
+    @PreDestroy
+    public void stop() {
+        redisServer().stop();
+    }
 }
